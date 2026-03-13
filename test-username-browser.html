@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Name Feature Tests</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-result {
+            padding: 5px;
+            margin: 2px 0;
+        }
+        .pass { color: green; }
+        .fail { color: red; }
+        h2 { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>GreetingComponent User Name Feature Tests (Task 2.2)</h1>
+    <div id="test-output"></div>
+    
+    <script src="js/app.js"></script>
+    <script>
+        const output = document.getElementById('test-output');
+        
+        function log(message, pass = null) {
+            const div = document.createElement('div');
+            div.className = 'test-result';
+            if (pass !== null) {
+                div.className += pass ? ' pass' : ' fail';
+                message = (pass ? '✓ ' : '✗ ') + message;
+            }
+            div.textContent = message;
+            output.appendChild(div);
+        }
+        
+        function testSetAndGetUserName() {
+            log('Testing setUserName and getUserName', null);
+            
+            const container = document.createElement('div');
+            const component = new GreetingComponent(container);
+            
+            // Test setting a name
+            component.setUserName('John');
+            const result1 = component.getUserName();
+            log(`setUserName('John') -> getUserName(): ${result1}`, result1 === 'John');
+            
+            // Test setting null
+            component.setUserName(null);
+            const result2 = component.getUserName();
+            log(`setUserName(null) -> getUserName(): ${result2}`, result2 === null);
+            
+            // Test setting empty string (should become null)
+            component.setUserName('');
+            const result3 = component.getUserName();
+            log(`setUserName('') -> getUserName(): ${result3}`, result3 === null);
+            
+            // Test trimming whitespace
+            component.setUserName('  Alice  ');
+            const result4 = component.getUserName();
+            log(`setUserName('  Alice  ') -> getUserName(): ${result4}`, result4 === 'Alice');
+        }
+        
+        function testSaveAndLoadUserName() {
+            log('', null);
+            log('Testing saveUserName and loadUserName', null);
+            
+            // Clear storage
+            localStorage.removeItem('productivity_dashboard_user_name');
+            
+            const container1 = document.createElement('div');
+            const component1 = new GreetingComponent(container1);
+            
+            // Set and save a name
+            component1.setUserName('Bob');
+            
+            // Check localStorage
+            const stored = localStorage.getItem('productivity_dashboard_user_name');
+            log(`After setUserName('Bob'), localStorage contains: ${stored}`, stored === 'Bob');
+            
+            // Create a new component and load
+            const container2 = document.createElement('div');
+            const component2 = new GreetingComponent(container2);
+            component2.loadUserName();
+            const loaded = component2.getUserName();
+            log(`New component loadUserName() -> getUserName(): ${loaded}`, loaded === 'Bob');
+            
+            // Test null storage
+            component1.setUserName(null);
+            const storedNull = localStorage.getItem('productivity_dashboard_user_name');
+            log(`After setUserName(null), localStorage contains: ${storedNull}`, storedNull === null);
+        }
+        
+        function testFormatGreetingMessage() {
+            log('', null);
+            log('Testing formatGreetingMessage', null);
+            
+            const container = document.createElement('div');
+            const component = new GreetingComponent(container);
+            
+            // Test with user name
+            const result1 = component.formatGreetingMessage('Good Morning', 'John');
+            log(`formatGreetingMessage('Good Morning', 'John'): ${result1}`, result1 === 'Good Morning, John!');
+            
+            // Test without user name
+            const result2 = component.formatGreetingMessage('Good Afternoon', null);
+            log(`formatGreetingMessage('Good Afternoon', null): ${result2}`, result2 === 'Good Afternoon');
+            
+            // Test with empty string (should be treated as no name)
+            const result3 = component.formatGreetingMessage('Good Evening', '');
+            log(`formatGreetingMessage('Good Evening', ''): ${result3}`, result3 === 'Good Evening');
+        }
+        
+        function testUIIntegration() {
+            log('', null);
+            log('Testing UI Integration', null);
+            
+            const container = document.createElement('div');
+            document.body.appendChild(container);
+            
+            const component = new GreetingComponent(container);
+            component.init();
+            
+            // Check that UI elements exist
+            const editBtn = container.querySelector('.btn-edit-name');
+            const saveBtn = container.querySelector('.btn-save-name');
+            const nameInput = container.querySelector('.name-input');
+            const greetingMsg = container.querySelector('.greeting-message');
+            
+            log('Edit button exists', editBtn !== null);
+            log('Save button exists', saveBtn !== null);
+            log('Name input exists', nameInput !== null);
+            log('Greeting message exists', greetingMsg !== null);
+            
+            // Test that greeting updates with name
+            component.setUserName('TestUser');
+            component.updateTime();
+            const greetingText = greetingMsg.textContent;
+            log(`Greeting includes user name: ${greetingText}`, greetingText.includes('TestUser'));
+            
+            // Clean up
+            component.destroy();
+            document.body.removeChild(container);
+        }
+        
+        // Run all tests
+        testSetAndGetUserName();
+        testSaveAndLoadUserName();
+        testFormatGreetingMessage();
+        testUIIntegration();
+        
+        log('', null);
+        log('=== All tests complete ===', null);
+    </script>
+</body>
+</html>

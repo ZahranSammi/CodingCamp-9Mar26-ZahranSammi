@@ -2,48 +2,144 @@
 
 /* CSS Variables for colors, spacing, and typography */
 :root {
-  /* Colors */
-  --color-primary: #3498db;
-  --color-primary-dark: #2980b9;
-  --color-success: #27ae60;
-  --color-success-dark: #229954;
-  --color-danger: #e74c3c;
-  --color-danger-dark: #c0392b;
-  --color-neutral: #95a5a6;
-  --color-neutral-dark: #7f8c8d;
-  --color-text-primary: #2c3e50;
-  --color-text-secondary: #7f8c8d;
-  --color-background: #f5f5f5;
+  /* Primary Colors - Blue gradient palette with HSL values */
+  --color-primary-50: hsl(210, 100%, 97%);
+  --color-primary-100: hsl(210, 100%, 92%);
+  --color-primary-200: hsl(210, 100%, 85%);
+  --color-primary-300: hsl(210, 100%, 75%);
+  --color-primary-400: hsl(210, 100%, 65%);
+  --color-primary-500: hsl(210, 100%, 55%); /* Base primary */
+  --color-primary-600: hsl(210, 100%, 45%);
+  --color-primary-700: hsl(210, 100%, 35%);
+  
+  /* Accent Colors - Purple/Pink gradient */
+  --color-accent-400: hsl(280, 80%, 65%);
+  --color-accent-500: hsl(280, 80%, 55%);
+  --color-accent-600: hsl(280, 80%, 45%);
+  
+  /* Neutral Colors - Blue-tinted grays */
+  --color-neutral-50: hsl(210, 20%, 98%);
+  --color-neutral-100: hsl(210, 20%, 95%);
+  --color-neutral-200: hsl(210, 20%, 90%);
+  --color-neutral-300: hsl(210, 20%, 80%);
+  --color-neutral-400: hsl(210, 20%, 60%);
+  --color-neutral-500: hsl(210, 20%, 40%);
+  --color-neutral-600: hsl(210, 20%, 30%);
+  --color-neutral-700: hsl(210, 20%, 20%);
+  --color-neutral-800: hsl(210, 20%, 15%);
+  --color-neutral-900: hsl(210, 20%, 10%);
+  
+  /* Semantic Colors - Darkened for sufficient contrast with white text (4.5:1 minimum) */
+  --color-success: hsl(145, 65%, 32%);
+  --color-success-dark: hsl(145, 65%, 28%);
+  --color-danger: hsl(0, 70%, 42%);
+  --color-danger-dark: hsl(0, 70%, 38%);
+  --color-warning: hsl(40, 95%, 42%);
+  
+  /* Gradients - Darkened for sufficient contrast with white text (4.5:1 minimum) */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-600), var(--color-accent-600));
+  --gradient-accent: linear-gradient(135deg, var(--color-accent-600), var(--color-primary-600));
+  --gradient-success: linear-gradient(135deg, hsl(145, 65%, 32%), hsl(145, 65%, 28%));
+  --gradient-danger: linear-gradient(135deg, hsl(0, 70%, 42%), hsl(0, 70%, 38%));
+  
+  /* Legacy color mappings for backward compatibility - Darkened for sufficient contrast */
+  --color-primary: var(--color-primary-600);
+  --color-primary-dark: var(--color-primary-700);
+  --color-neutral: var(--color-neutral-600);
+  --color-neutral-dark: var(--color-neutral-700);
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-500);
+  --color-background: var(--color-neutral-50);
   --color-white: #ffffff;
-  --color-border: #ecf0f1;
-  --color-disabled: #bdc3c7;
+  --color-border: var(--color-neutral-200);
+  --color-disabled: var(--color-neutral-300);
   
-  /* Spacing */
-  --spacing-xs: 8px;
-  --spacing-sm: 12px;
-  --spacing-md: 20px;
-  --spacing-lg: 30px;
-  --spacing-xl: 40px;
+  /* Spacing System - 8px base unit, all values are multiples of 0.25rem (4px) */
+  --spacing-1: 0.25rem;  /* 4px */
+  --spacing-2: 0.5rem;   /* 8px */
+  --spacing-3: 0.75rem;  /* 12px */
+  --spacing-4: 1rem;     /* 16px */
+  --spacing-5: 1.25rem;  /* 20px */
+  --spacing-6: 1.5rem;   /* 24px */
+  --spacing-8: 2rem;     /* 32px */
+  --spacing-10: 2.5rem;  /* 40px */
+  --spacing-12: 3rem;    /* 48px */
+  --spacing-16: 4rem;    /* 64px */
   
-  /* Typography */
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  --font-family-mono: 'Courier New', monospace;
-  --font-size-xs: 0.875rem;
-  --font-size-sm: 1rem;
-  --font-size-md: 1.2rem;
-  --font-size-lg: 2rem;
-  --font-size-xl: 2.5rem;
-  --font-size-xxl: 3rem;
-  --font-size-xxxl: 4rem;
-  --line-height-base: 1.6;
+  /* Legacy spacing mappings for backward compatibility */
+  --spacing-xs: var(--spacing-2);   /* 8px */
+  --spacing-sm: var(--spacing-3);   /* 12px */
+  --spacing-md: var(--spacing-5);   /* 20px */
+  --spacing-lg: var(--spacing-8);   /* 32px */
+  --spacing-xl: var(--spacing-10);  /* 40px */
   
-  /* Border Radius */
-  --border-radius-sm: 4px;
-  --border-radius-md: 8px;
+  /* Typography System */
+  /* Font Families */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  --font-family-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
   
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  /* Font Sizes - Fluid typography using clamp() for responsive scaling */
+  --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --font-size-md: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+  --font-size-lg: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --font-size-xl: clamp(2rem, 1.7rem + 1.5vw, 2.5rem);
+  --font-size-xxl: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+  --font-size-xxxl: clamp(3rem, 2.5rem + 2.5vw, 4.5rem);
+  
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-base: 1.5; /* Legacy compatibility */
+  
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em;
+  --letter-spacing-wider: 0.1em;
+  
+  /* Border Radius System - Softer, more rounded corners */
+  --radius-sm: 0.5rem;   /* 8px */
+  --radius-md: 0.75rem;  /* 12px */
+  --radius-lg: 1rem;     /* 16px */
+  --radius-xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px; /* Fully rounded */
+  
+  /* Legacy border radius mappings for backward compatibility */
+  --border-radius-sm: var(--radius-sm);
+  --border-radius-md: var(--radius-md);
+  
+  /* Shadow System - Multi-layer shadows for depth perception */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 
+    0 10px 15px rgba(0, 0, 0, 0.1),
+    0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 
+    0 20px 25px rgba(0, 0, 0, 0.1),
+    0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 10px 20px rgba(0, 0, 0, 0.1);
+  
+  /* Colored shadows for interactive elements */
+  --shadow-primary: 0 8px 16px rgba(52, 152, 219, 0.3);
+  --shadow-success: 0 8px 16px rgba(39, 174, 96, 0.3);
+  --shadow-danger: 0 8px 16px rgba(231, 76, 60, 0.3);
 }
 
 * {
@@ -89,17 +185,71 @@ body {
 }
 
 .component-section {
-  background: var(--color-white);
-  border-radius: var(--border-radius-md);
+  /* Position relative for pseudo-element gradient border */
+  position: relative;
+  
+  /* Glassmorphism base styles */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  
+  /* Border and radius */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-xl);
+  
+  /* Spacing */
   padding: var(--spacing-lg);
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.3s ease;
+  
+  /* Multi-layer box-shadow */
+  box-shadow: var(--shadow-lg);
+  
+  /* Smooth transitions for all properties */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
   /* Optimize for GPU acceleration */
-  will-change: box-shadow;
+  will-change: transform, box-shadow;
+}
+
+/* Gradient border using pseudo-element */
+.component-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-xl);
+  padding: 2px; /* Border width */
+  background: var(--gradient-primary);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .component-section:hover {
-  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2xl);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Enhance gradient border on hover */
+.component-section:hover::before {
+  opacity: 1;
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(20px)) {
+  .component-section {
+    background: rgba(255, 255, 255, 0.95);
+  }
 }
 
 /* Greeting Component Styles */
@@ -197,58 +347,74 @@ body {
 .btn-start,
 .btn-stop,
 .btn-reset {
-  padding: var(--spacing-sm) 24px;
+  /* Apply consistent padding using spacing variables */
+  padding: var(--spacing-3) var(--spacing-6);
   font-size: 1.1rem;
+  /* Remove default border */
   border: none;
-  border-radius: var(--border-radius-sm);
+  /* Apply border-radius using CSS variables */
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.3s ease;
-  font-weight: 600;
+  /* Add smooth transitions */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Apply font-weight-semibold */
+  font-weight: var(--font-weight-semibold);
   min-width: 100px;
+  /* Set white text color */
+  color: white;
   /* Optimize for GPU acceleration */
   will-change: transform;
 }
 
 .btn-start {
-  background-color: var(--color-success);
-  color: var(--color-white);
+  /* Apply gradient-success background */
+  background: var(--gradient-success);
+  /* Add box-shadow-md */
+  box-shadow: var(--shadow-md);
 }
 
 .btn-start:hover {
-  background-color: var(--color-success-dark);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-success);
 }
 
 .btn-start:active {
   transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-stop {
-  background-color: var(--color-danger);
-  color: var(--color-white);
+  /* Apply gradient-danger background */
+  background: var(--gradient-danger);
+  /* Add box-shadow-md */
+  box-shadow: var(--shadow-md);
 }
 
 .btn-stop:hover {
-  background-color: var(--color-danger-dark);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-danger);
 }
 
 .btn-stop:active {
   transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-reset {
-  background-color: var(--color-neutral);
-  color: var(--color-white);
+  /* Apply gradient-primary background */
+  background: var(--gradient-primary);
+  /* Add box-shadow-md */
+  box-shadow: var(--shadow-md);
 }
 
 .btn-reset:hover {
-  background-color: var(--color-neutral-dark);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
 }
 
 .btn-reset:active {
   transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .duration-config {
@@ -442,24 +608,35 @@ body {
 }
 
 .btn-add-task {
-  padding: var(--spacing-xs) var(--spacing-md);
+  /* Apply consistent padding using spacing variables */
+  padding: var(--spacing-3) var(--spacing-6);
   font-size: var(--font-size-sm);
-  background-color: var(--color-success);
-  color: var(--color-white);
+  /* Apply gradient-primary background */
+  background: var(--gradient-primary);
+  /* Set white text color */
+  color: white;
+  /* Remove default border */
   border: none;
-  border-radius: var(--border-radius-sm);
+  /* Apply border-radius using CSS variables */
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: 600;
+  /* Add smooth transitions */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Apply font-weight-semibold */
+  font-weight: var(--font-weight-semibold);
   white-space: nowrap;
+  /* Add box-shadow-md */
+  box-shadow: var(--shadow-md);
 }
 
 .btn-add-task:hover {
-  background-color: var(--color-success-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
 }
 
 .btn-add-task:active {
-  transform: translateY(1px);
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .duplicate-warning {
@@ -606,23 +783,34 @@ body {
 }
 
 .btn-add-link {
-  padding: var(--spacing-xs) var(--spacing-md);
+  /* Apply consistent padding using spacing variables */
+  padding: var(--spacing-3) var(--spacing-6);
   font-size: var(--font-size-sm);
-  background-color: var(--color-success);
-  color: var(--color-white);
+  /* Apply gradient-primary background */
+  background: var(--gradient-primary);
+  /* Set white text color */
+  color: white;
+  /* Remove default border */
   border: none;
-  border-radius: var(--border-radius-sm);
+  /* Apply border-radius using CSS variables */
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: 600;
+  /* Add smooth transitions */
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Apply font-weight-semibold */
+  font-weight: var(--font-weight-semibold);
+  /* Add box-shadow-md */
+  box-shadow: var(--shadow-md);
 }
 
 .btn-add-link:hover {
-  background-color: var(--color-success-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
 }
 
 .btn-add-link:active {
-  transform: translateY(1px);
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .links-grid {

@@ -25,46 +25,51 @@ describe('Task 3.2: Button Hover and Active States', () => {
 
   describe('Hover States - Transform and Colored Shadows', () => {
     test('.btn-start should have translateY(-2px) and shadow-success on hover', () => {
-      const hoverMatch = cssContent.match(/\.btn-start:hover\s*{([^}]*)}/);
+      // Find the specific .btn-start:hover rule that contains transform
+      const hoverMatch = cssContent.match(/\.btn-start:hover\s*{[^}]*transform:\s*translateY\(-2px\)[^}]*}/s);
       expect(hoverMatch).not.toBeNull();
       
-      const hoverStyles = hoverMatch[1];
+      const hoverStyles = hoverMatch[0];
       expect(hoverStyles).toMatch(/transform:\s*translateY\(-2px\)/);
       expect(hoverStyles).toMatch(/box-shadow:\s*var\(--shadow-success\)/);
     });
 
     test('.btn-stop should have translateY(-2px) and shadow-danger on hover', () => {
-      const hoverMatch = cssContent.match(/\.btn-stop:hover\s*{([^}]*)}/);
+      // Find the specific .btn-stop:hover rule that contains transform
+      const hoverMatch = cssContent.match(/\.btn-stop:hover\s*{[^}]*transform:\s*translateY\(-2px\)[^}]*}/s);
       expect(hoverMatch).not.toBeNull();
       
-      const hoverStyles = hoverMatch[1];
+      const hoverStyles = hoverMatch[0];
       expect(hoverStyles).toMatch(/transform:\s*translateY\(-2px\)/);
       expect(hoverStyles).toMatch(/box-shadow:\s*var\(--shadow-danger\)/);
     });
 
     test('.btn-reset should have translateY(-2px) and shadow-primary on hover', () => {
-      const hoverMatch = cssContent.match(/\.btn-reset:hover\s*{([^}]*)}/);
+      // Find the specific .btn-reset:hover rule that contains transform
+      const hoverMatch = cssContent.match(/\.btn-reset:hover\s*{[^}]*transform:\s*translateY\(-2px\)[^}]*}/s);
       expect(hoverMatch).not.toBeNull();
       
-      const hoverStyles = hoverMatch[1];
+      const hoverStyles = hoverMatch[0];
       expect(hoverStyles).toMatch(/transform:\s*translateY\(-2px\)/);
       expect(hoverStyles).toMatch(/box-shadow:\s*var\(--shadow-primary\)/);
     });
 
     test('.btn-add-task should have translateY(-2px) and shadow-primary on hover', () => {
-      const hoverMatch = cssContent.match(/\.btn-add-task:hover\s*{([^}]*)}/);
+      // Find the specific .btn-add-task:hover rule that contains transform
+      const hoverMatch = cssContent.match(/\.btn-add-task:hover\s*{[^}]*transform:\s*translateY\(-2px\)[^}]*}/s);
       expect(hoverMatch).not.toBeNull();
       
-      const hoverStyles = hoverMatch[1];
+      const hoverStyles = hoverMatch[0];
       expect(hoverStyles).toMatch(/transform:\s*translateY\(-2px\)/);
       expect(hoverStyles).toMatch(/box-shadow:\s*var\(--shadow-primary\)/);
     });
 
     test('.btn-add-link should have translateY(-2px) and shadow-primary on hover', () => {
-      const hoverMatch = cssContent.match(/\.btn-add-link:hover\s*{([^}]*)}/);
+      // Find the specific .btn-add-link:hover rule that contains transform
+      const hoverMatch = cssContent.match(/\.btn-add-link:hover\s*{[^}]*transform:\s*translateY\(-2px\)[^}]*}/s);
       expect(hoverMatch).not.toBeNull();
       
-      const hoverStyles = hoverMatch[1];
+      const hoverStyles = hoverMatch[0];
       expect(hoverStyles).toMatch(/transform:\s*translateY\(-2px\)/);
       expect(hoverStyles).toMatch(/box-shadow:\s*var\(--shadow-primary\)/);
     });

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skeleton Loading States Demo - Task 10</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    body {
+      padding: 2rem;
+    }
+    
+    .demo-section {
+      margin-bottom: 3rem;
+    }
+    
+    .demo-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--color-primary-600);
+    }
+    
+    .demo-description {
+      margin-bottom: 1rem;
+      color: var(--color-text-secondary);
+    }
+    
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: 2rem;
+    }
+    
+    .controls {
+      display: flex;
+      gap: var(--spacing-4);
+      margin-bottom: 2rem;
+    }
+    
+    .btn-demo {
+      padding: var(--spacing-3) var(--spacing-6);
+      font-size: var(--font-size-sm);
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: var(--font-weight-semibold);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .btn-demo:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="dashboard-header">
+      <h1>Skeleton Loading States Demo</h1>
+      <p style="color: var(--color-text-secondary); margin-top: 1rem;">
+        Task 10: Implement loading states and skeleton screens
+      </p>
+    </div>
+
+    <div class="controls">
+      <button class="btn-demo" onclick="showSkeletons()">Show Skeleton Loading</button>
+      <button class="btn-demo" onclick="showContent()">Show Real Content</button>
+      <button class="btn-demo" onclick="simulateLoading()">Simulate Loading (3s)</button>
+    </div>
+
+    <div class="demo-section">
+      <h2 class="demo-title">10.1 Shimmer Keyframe Animation</h2>
+      <p class="demo-description">
+        The shimmer animation moves a gradient background from -1000px to 1000px, creating a smooth loading effect.
+      </p>
+      <div class="component-section">
+        <div class="skeleton" style="height: 100px; width: 100%;"></div>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2 class="demo-title">10.2 Skeleton Screen Styles</h2>
+      <p class="demo-description">
+        Skeleton elements use the shimmer animation with 2s duration and infinite iteration. They match component dimensions.
+      </p>
+      <div class="demo-grid">
+        <div class="component-section">
+          <h3 style="margin-bottom: 1rem;">Text Skeletons</h3>
+          <div class="skeleton skeleton-text large"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text small" style="width: 60%;"></div>
+        </div>
+        
+        <div class="component-section">
+          <h3 style="margin-bottom: 1rem;">Button & Input Skeletons</h3>
+          <div class="skeleton skeleton-button" style="margin-bottom: 1rem;"></div>
+          <div class="skeleton skeleton-input"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2 class="demo-title">10.3 Layout Stability During Loading</h2>
+      <p class="demo-description">
+        Skeleton components have explicit dimensions to prevent content shift when real content loads.
+      </p>
+      <div class="demo-grid" id="componentGrid">
+        <!-- Greeting Component Skeleton -->
+        <div class="component-section loading" id="greeting">
+          <div class="skeleton-greeting">
+            <div class="skeleton skeleton-text large" style="width: 80%; margin: 0 auto;"></div>
+            <div class="skeleton skeleton-text" style="width: 60%; margin: 0 auto; height: 3em;"></div>
+            <div class="skeleton skeleton-text small" style="width: 40%; margin: 0 auto;"></div>
+          </div>
+        </div>
+
+        <!-- Timer Component Skeleton -->
+        <div class="component-section loading" id="timer">
+          <div class="skeleton-timer">
+            <div class="skeleton skeleton-text" style="width: 50%; margin: 0 auto; height: 4em;"></div>
+            <div style="display: flex; gap: var(--spacing-2); justify-content: center;">
+              <div class="skeleton skeleton-button"></div>
+              <div class="skeleton skeleton-button"></div>
+              <div class="skeleton skeleton-button"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Task List Component Skeleton -->
+        <div class="component-section loading" id="tasks">
+          <div class="skeleton-task-list">
+            <div class="skeleton skeleton-input" style="margin-bottom: var(--spacing-3);"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+          </div>
+        </div>
+
+        <!-- Quick Links Component Skeleton -->
+        <div class="component-section loading" id="links">
+          <div class="skeleton-quick-links">
+            <div class="skeleton skeleton-input" style="margin-bottom: var(--spacing-3);"></div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-2);">
+              <div class="skeleton skeleton-card" style="height: 80px;"></div>
+              <div class="skeleton skeleton-card" style="height: 80px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showSkeletons() {
+      document.getElementById('greeting').innerHTML = `
+        <div class="skeleton-greeting">
+          <div class="skeleton skeleton-text large" style="width: 80%; margin: 0 auto;"></div>
+          <div class="skeleton skeleton-text" style="width: 60%; margin: 0 auto; height: 3em;"></div>
+          <div class="skeleton skeleton-text small" style="width: 40%; margin: 0 auto;"></div>
+        </div>
+      `;
+      
+      document.getElementById('timer').innerHTML = `
+        <div class="skeleton-timer">
+          <div class="skeleton skeleton-text" style="width: 50%; margin: 0 auto; height: 4em;"></div>
+          <div style="display: flex; gap: var(--spacing-2); justify-content: center;">
+            <div class="skeleton skeleton-button"></div>
+            <div class="skeleton skeleton-button"></div>
+            <div class="skeleton skeleton-button"></div>
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('tasks').innerHTML = `
+        <div class="skeleton-task-list">
+          <div class="skeleton skeleton-input" style="margin-bottom: var(--spacing-3);"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text"></div>
+        </div>
+      `;
+      
+      document.getElementById('links').innerHTML = `
+        <div class="skeleton-quick-links">
+          <div class="skeleton skeleton-input" style="margin-bottom: var(--spacing-3);"></div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-2);">
+            <div class="skeleton skeleton-card" style="height: 80px;"></div>
+            <div class="skeleton skeleton-card" style="height: 80px;"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function showContent() {
+      document.getElementById('greeting').innerHTML = `
+        <div class="greeting-component">
+          <div class="greeting-message">Good Morning, User!</div>
+          <div class="time-display">10:30 AM</div>
+          <div class="date-display">Monday, January 15, 2024</div>
+        </div>
+      `;
+      
+      document.getElementById('timer').innerHTML = `
+        <div class="focus-timer-component">
+          <div class="timer-display">25:00</div>
+          <div class="timer-controls">
+            <button class="btn-start">Start</button>
+            <button class="btn-stop">Stop</button>
+            <button class="btn-reset">Reset</button>
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('tasks').innerHTML = `
+        <div class="task-list-component">
+          <div class="task-input-container">
+            <input type="text" class="task-input" placeholder="Add a new task...">
+          </div>
+          <ul class="task-list">
+            <li class="task-item">
+              <input type="checkbox" class="task-checkbox">
+              <span class="task-text">Complete project documentation</span>
+            </li>
+            <li class="task-item">
+              <input type="checkbox" class="task-checkbox">
+              <span class="task-text">Review pull requests</span>
+            </li>
+          </ul>
+        </div>
+      `;
+      
+      document.getElementById('links').innerHTML = `
+        <div class="quick-links-component">
+          <div class="link-input-container">
+            <input type="text" class="link-name-input" placeholder="Link name...">
+          </div>
+          <div class="links-grid">
+            <div class="link-button">
+              <a href="#">GitHub</a>
+            </div>
+            <div class="link-button">
+              <a href="#">Docs</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function simulateLoading() {
+      showSkeletons();
+      setTimeout(showContent, 3000);
+    }
+  </script>
+</body>
+</html>

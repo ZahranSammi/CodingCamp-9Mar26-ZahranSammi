@@ -1,10 +1,10 @@
 /**
- * Property-Based Tests for Button Text Contrast
- * Feature: modern-design-refresh, Property 1: Text Contrast Compliance (buttons)
+ * Property-Based Tests for Input Text Contrast
+ * Feature: modern-design-refresh, Property 1: Text Contrast Compliance (inputs)
  * 
- * **Validates: Requirements 6.6**
+ * **Validates: Requirements 7.6**
  * 
- * For any text element in buttons, the contrast ratio between the text color 
+ * For any text element in input fields, the contrast ratio between the text color 
  * and its background color must be at least 4.5:1 for normal text or 3:1 for 
  * large text (18pt+ or 14pt+ bold), meeting WCAG AA standards.
  */
@@ -13,10 +13,8 @@ import fc from 'fast-check';
 import fs from 'fs';
 import path from 'path';
 
-// Load the HTML and CSS for testing
-const htmlPath = path.join(process.cwd(), 'index.html');
+// Load the CSS for testing
 const cssPath = path.join(process.cwd(), 'css', 'styles.css');
-const htmlContent = fs.readFileSync(htmlPath, 'utf-8');
 const cssContent = fs.readFileSync(cssPath, 'utf-8');
 
 /**
@@ -152,26 +150,19 @@ function calculateContrastRatio(color1, color2) {
 }
 
 /**
- * Helper function to extract button styles directly from CSS
+ * Helper function to extract input styles directly from CSS
  */
-function extractButtonStylesFromCSS(cssContent) {
-  const buttonStyles = {};
+function extractInputStylesFromCSS(cssContent) {
+  const inputStyles = {};
   
-  // Define button selectors and their expected styles
-  const buttonSelectors = [
-    '.btn-start',
-    '.btn-stop',
-    '.btn-reset',
-    '.btn-add-task',
-    '.btn-add-link',
-    '.btn-edit-name',
-    '.btn-save-name',
-    '.btn-set-duration',
-    '.btn-edit-task',
-    '.btn-delete-task',
-    '.btn-save-task',
-    '.btn-cancel-edit',
-    '.btn-delete-link'
+  // Define input selectors
+  const inputSelectors = [
+    '.name-input',
+    '.duration-input',
+    '.task-input',
+    '.task-edit-input',
+    '.link-name-input',
+    '.link-url-input'
   ];
   
   // Extract CSS variables first
@@ -179,25 +170,22 @@ function extractButtonStylesFromCSS(cssContent) {
   const rootMatch = cssContent.match(/:root\s*\{([^}]+)\}/s);
   if (rootMatch) {
     const rootContent = rootMatch[1];
-    // Match CSS variables, handling multi-line values
     const varMatches = rootContent.matchAll(/(--[^:]+):\s*([^;]+);/gs);
     for (const match of varMatches) {
       const varName = match[1].trim();
-      const varValue = match[2].trim().replace(/\s+/g, ' '); // Normalize whitespace
+      const varValue = match[2].trim().replace(/\s+/g, ' ');
       cssVars[varName] = varValue;
     }
   }
   
   // Function to resolve CSS variable recursively
   const resolveVar = (value, depth = 0) => {
-    if (!value || depth > 10) return value; // Prevent infinite recursion
+    if (!value || depth > 10) return value;
     
-    // Check if there are any var() references
     if (!value.includes('var(')) {
       return value;
     }
     
-    // Replace all var() references in the string
     let resolved = value;
     const varRegex = /var\((--[^,)]+)(?:,\s*([^)]+))?\)/g;
     
@@ -206,7 +194,6 @@ function extractButtonStylesFromCSS(cssContent) {
       return varValue;
     });
     
-    // If we made any replacements and there are still var() references, recurse
     if (resolved !== value && resolved.includes('var(')) {
       return resolveVar(resolved, depth + 1);
     }
@@ -214,13 +201,12 @@ function extractButtonStylesFromCSS(cssContent) {
     return resolved;
   };
   
-  // Initialize button styles
-  for (const selector of buttonSelectors) {
-    buttonStyles[selector] = {};
+  // Initialize input styles
+  for (const selector of inputSelectors) {
+    inputStyles[selector] = {};
   }
   
-  // Extract styles from CSS rules (including multi-selector rules)
-  // Match CSS rules with their selectors
+  // Extract styles from CSS rules
   const ruleRegex = /([^{}]+)\{([^}]+)\}/gs;
   const rules = cssContent.matchAll(ruleRegex);
   
@@ -228,7 +214,7 @@ function extractButtonStylesFromCSS(cssContent) {
     const selectorsPart = rule[1].trim();
     const styleBlock = rule[2];
     
-    // Skip pseudo-classes and pseudo-elements (hover, active, focus, etc.)
+    // Skip pseudo-classes and pseudo-elements (except for placeholder)
     if (selectorsPart.includes(':hover') || selectorsPart.includes(':active') || 
         selectorsPart.includes(':focus') || selectorsPart.includes('::') ||
         selectorsPart.includes(':disabled')) {
@@ -238,10 +224,9 @@ function extractButtonStylesFromCSS(cssContent) {
     // Split multi-selector rules by comma
     const selectorsInRule = selectorsPart.split(',').map(s => s.trim());
     
-    // Check if any of our button selectors match exactly
-    const matchingSelectors = buttonSelectors.filter(selector => 
+    // Check if any of our input selectors match
+    const matchingSelectors = inputSelectors.filter(selector => 
       selectorsInRule.some(ruleSelector => {
-        // Exact match or selector is part of a compound selector (e.g., ".btn-start.active")
         return ruleSelector === selector || ruleSelector.startsWith(selector + '.');
       })
     );
@@ -250,7 +235,7 @@ function extractButtonStylesFromCSS(cssContent) {
       // Extract properties from this style block
       const style = {};
       
-      // Extract color (but not background-color)
+      // Extract color
       const colorMatch = styleBlock.match(/(?:^|;|\s)color:\s*([^;]+);/);
       if (colorMatch) {
         style.color = resolveVar(colorMatch[1].trim());
@@ -262,7 +247,7 @@ function extractButtonStylesFromCSS(cssContent) {
         style.backgroundColor = resolveVar(bgColorMatch[1].trim());
       }
       
-      // Extract background (for gradients)
+      // Extract background (for rgba values)
       const bgMatch = styleBlock.match(/background:\s*([^;]+);/);
       if (bgMatch) {
         style.background = resolveVar(bgMatch[1].trim());
@@ -281,22 +266,20 @@ function extractButtonStylesFromCSS(cssContent) {
       }
       
       // Apply styles to all matching selectors
-      // Only overwrite properties that are explicitly defined in this rule
       for (const selector of matchingSelectors) {
-        if (!buttonStyles[selector]) {
-          buttonStyles[selector] = {};
+        if (!inputStyles[selector]) {
+          inputStyles[selector] = {};
         }
-        // Only set properties that were found in this rule
-        if (style.color !== undefined) buttonStyles[selector].color = style.color;
-        if (style.backgroundColor !== undefined) buttonStyles[selector].backgroundColor = style.backgroundColor;
-        if (style.background !== undefined) buttonStyles[selector].background = style.background;
-        if (style.fontSize !== undefined) buttonStyles[selector].fontSize = style.fontSize;
-        if (style.fontWeight !== undefined) buttonStyles[selector].fontWeight = style.fontWeight;
+        if (style.color !== undefined) inputStyles[selector].color = style.color;
+        if (style.backgroundColor !== undefined) inputStyles[selector].backgroundColor = style.backgroundColor;
+        if (style.background !== undefined) inputStyles[selector].background = style.background;
+        if (style.fontSize !== undefined) inputStyles[selector].fontSize = style.fontSize;
+        if (style.fontWeight !== undefined) inputStyles[selector].fontWeight = style.fontWeight;
       }
     }
   }
   
-  return { buttonStyles, cssVars };
+  return { inputStyles, cssVars };
 }
 
 /**
@@ -309,10 +292,8 @@ function fontSizeToPixels(fontSize, baseFontSize = 16) {
   const clampMatch = fontSize.match(/clamp\([^,]+,\s*([^,]+),/);
   if (clampMatch) {
     const preferredValue = clampMatch[1].trim();
-    // Parse the preferred value which might contain calc()
     const calcMatch = preferredValue.match(/([\d.]+)rem\s*\+\s*([\d.]+)vw/);
     if (calcMatch) {
-      // Use the rem value as a reasonable approximation
       return parseFloat(calcMatch[1]) * baseFontSize;
     }
     return fontSizeToPixels(preferredValue, baseFontSize);
@@ -330,7 +311,6 @@ function fontSizeToPixels(fontSize, baseFontSize = 16) {
     return parseFloat(fontSize);
   }
   
-  // Try to parse as a number
   const numValue = parseFloat(fontSize);
   if (!isNaN(numValue)) {
     return numValue;
@@ -361,49 +341,35 @@ function fontWeightToNumeric(fontWeight) {
 }
 
 /**
- * Helper function to extract colors from CSS gradient strings
+ * Helper function to get the effective background color from input styles
  */
-function extractColorsFromGradient(gradientString) {
-  // Match all color values in the gradient
-  const colorMatches = gradientString.match(/rgba?\([^)]+\)|hsla?\([^)]+\)|#[a-f0-9]{6}|#[a-f0-9]{3}/gi);
-  if (colorMatches && colorMatches.length > 0) {
-    // Return the first color (start of gradient)
-    return colorMatches[0];
-  }
-  return null;
-}
-
-/**
- * Helper function to get the effective background color from button styles
- */
-function getBackgroundColorFromStyle(buttonStyle) {
-  // Check for gradient background first
-  if (buttonStyle.background && buttonStyle.background.includes('gradient')) {
-    const color = extractColorsFromGradient(buttonStyle.background);
-    if (color) {
-      return parseColor(color);
-    }
+function getBackgroundColorFromStyle(inputStyle) {
+  // Check for background with rgba
+  if (inputStyle.background && inputStyle.background.includes('rgba')) {
+    return parseColor(inputStyle.background);
   }
   
   // Check for solid background-color
-  if (buttonStyle.backgroundColor) {
-    return parseColor(buttonStyle.backgroundColor);
+  if (inputStyle.backgroundColor) {
+    return parseColor(inputStyle.backgroundColor);
   }
   
-  // Default to white
+  // Default to white (inputs typically have white backgrounds)
   return { r: 255, g: 255, b: 255 };
 }
 
 /**
- * Helper function to get text color from button styles
+ * Helper function to get text color from input styles
  */
-function getTextColorFromStyle(buttonStyle) {
-  if (buttonStyle.color) {
-    return parseColor(buttonStyle.color);
+function getTextColorFromStyle(inputStyle, cssVars) {
+  if (inputStyle.color) {
+    return parseColor(inputStyle.color);
   }
   
-  // Default to black
-  return { r: 0, g: 0, b: 0 };
+  // Default to the text-primary color from CSS variables
+  // which is var(--color-neutral-900) = hsl(210, 20%, 10%)
+  const textPrimary = cssVars['--color-text-primary'] || cssVars['--color-neutral-900'] || 'hsl(210, 20%, 10%)';
+  return parseColor(textPrimary);
 }
 
 /**
@@ -411,12 +377,10 @@ function getTextColorFromStyle(buttonStyle) {
  * Large text is 18pt (24px) or larger, or 14pt (18.66px) or larger if bold (700+)
  */
 function isLargeText(fontSize, fontWeight) {
-  // 18pt = 24px
   if (fontSize >= 24) {
     return true;
   }
   
-  // 14pt = 18.66px (approximately 19px) and bold
   if (fontSize >= 18.66 && fontWeight >= 700) {
     return true;
   }
@@ -425,39 +389,39 @@ function isLargeText(fontSize, fontWeight) {
 }
 
 /**
- * Property 1: Text Contrast Compliance (buttons)
+ * Property 1: Text Contrast Compliance (inputs)
  * 
- * For any text element in buttons, the contrast ratio between the text color 
+ * For any text element in input fields, the contrast ratio between the text color 
  * and its background color must be at least 4.5:1 for normal text or 3:1 for 
  * large text (18pt+ or 14pt+ bold), meeting WCAG AA standards.
  * 
- * **Validates: Requirements 6.6**
+ * **Validates: Requirements 7.6**
  */
-describe('Modern Design Refresh - Property 1: Text Contrast Compliance (buttons)', () => {
-  let buttonStyles, cssVars;
+describe('Modern Design Refresh - Property 1: Text Contrast Compliance (inputs)', () => {
+  let inputStyles, cssVars;
   
   beforeAll(() => {
-    const extracted = extractButtonStylesFromCSS(cssContent);
-    buttonStyles = extracted.buttonStyles;
+    const extracted = extractInputStylesFromCSS(cssContent);
+    inputStyles = extracted.inputStyles;
     cssVars = extracted.cssVars;
   });
   
-  test('all button styles have sufficient text contrast (minimum 4.5:1 for normal text, 3:1 for large text)', () => {
-    const buttonSelectors = Object.keys(buttonStyles);
+  test('all input fields have sufficient text contrast (minimum 4.5:1 for normal text, 3:1 for large text)', () => {
+    const inputSelectors = Object.keys(inputStyles);
     
-    if (buttonSelectors.length === 0) {
-      console.warn('No button styles found in CSS');
+    if (inputSelectors.length === 0) {
+      console.warn('No input styles found in CSS');
       return;
     }
     
     fc.assert(
       fc.property(
-        fc.constantFrom(...buttonSelectors),
+        fc.constantFrom(...inputSelectors),
         (selector) => {
-          const style = buttonStyles[selector];
+          const style = inputStyles[selector];
           
           // Get text and background colors
-          const textColor = getTextColorFromStyle(style);
+          const textColor = getTextColorFromStyle(style, cssVars);
           const bgColor = getBackgroundColorFromStyle(style);
           
           // Get font properties
@@ -478,7 +442,7 @@ describe('Modern Design Refresh - Property 1: Text Contrast Compliance (buttons)
           
           if (!meetsRequirement) {
             console.error(
-              `Button contrast failure:\n` +
+              `Input contrast failure:\n` +
               `  Selector: ${selector}\n` +
               `  Style: ${JSON.stringify(style)}\n` +
               `  Text Color: rgb(${textColor.r}, ${textColor.g}, ${textColor.b})\n` +
@@ -499,17 +463,37 @@ describe('Modern Design Refresh - Property 1: Text Contrast Compliance (buttons)
     );
   });
   
-  test('primary action buttons (start, stop, reset) have sufficient contrast', () => {
-    const primarySelectors = ['.btn-start', '.btn-stop', '.btn-reset'];
+  test('name input has sufficient contrast', () => {
+    const selector = '.name-input';
+    const style = inputStyles[selector];
     
-    primarySelectors.forEach(selector => {
-      const style = buttonStyles[selector];
+    if (!style) {
+      console.warn(`No styles found for ${selector}`);
+      return;
+    }
+    
+    const textColor = getTextColorFromStyle(style, cssVars);
+    const bgColor = getBackgroundColorFromStyle(style);
+    const fontSize = fontSizeToPixels(style.fontSize);
+    const fontWeight = fontWeightToNumeric(style.fontWeight);
+    const isLarge = isLargeText(fontSize, fontWeight);
+    const contrastRatio = calculateContrastRatio(textColor, bgColor);
+    const minRatio = isLarge ? 3.0 : 4.5;
+    
+    expect(contrastRatio).toBeGreaterThanOrEqual(minRatio);
+  });
+  
+  test('task inputs have sufficient contrast', () => {
+    const taskSelectors = ['.task-input', '.task-edit-input'];
+    
+    taskSelectors.forEach(selector => {
+      const style = inputStyles[selector];
       if (!style) {
         console.warn(`No styles found for ${selector}`);
         return;
       }
       
-      const textColor = getTextColorFromStyle(style);
+      const textColor = getTextColorFromStyle(style, cssVars);
       const bgColor = getBackgroundColorFromStyle(style);
       const fontSize = fontSizeToPixels(style.fontSize);
       const fontWeight = fontWeightToNumeric(style.fontWeight);
@@ -521,17 +505,17 @@ describe('Modern Design Refresh - Property 1: Text Contrast Compliance (buttons)
     });
   });
   
-  test('add buttons (add-task, add-link) have sufficient contrast', () => {
-    const addSelectors = ['.btn-add-task', '.btn-add-link'];
+  test('link inputs have sufficient contrast', () => {
+    const linkSelectors = ['.link-name-input', '.link-url-input'];
     
-    addSelectors.forEach(selector => {
-      const style = buttonStyles[selector];
+    linkSelectors.forEach(selector => {
+      const style = inputStyles[selector];
       if (!style) {
         console.warn(`No styles found for ${selector}`);
         return;
       }
       
-      const textColor = getTextColorFromStyle(style);
+      const textColor = getTextColorFromStyle(style, cssVars);
       const bgColor = getBackgroundColorFromStyle(style);
       const fontSize = fontSizeToPixels(style.fontSize);
       const fontWeight = fontWeightToNumeric(style.fontWeight);
@@ -543,48 +527,24 @@ describe('Modern Design Refresh - Property 1: Text Contrast Compliance (buttons)
     });
   });
   
-  test('edit buttons have sufficient contrast', () => {
-    const editSelectors = ['.btn-edit-name', '.btn-edit-task', '.btn-set-duration'];
+  test('duration input has sufficient contrast', () => {
+    const selector = '.duration-input';
+    const style = inputStyles[selector];
     
-    editSelectors.forEach(selector => {
-      const style = buttonStyles[selector];
-      if (!style) {
-        console.warn(`No styles found for ${selector}`);
-        return;
-      }
-      
-      const textColor = getTextColorFromStyle(style);
-      const bgColor = getBackgroundColorFromStyle(style);
-      const fontSize = fontSizeToPixels(style.fontSize);
-      const fontWeight = fontWeightToNumeric(style.fontWeight);
-      const isLarge = isLargeText(fontSize, fontWeight);
-      const contrastRatio = calculateContrastRatio(textColor, bgColor);
-      const minRatio = isLarge ? 3.0 : 4.5;
-      
-      expect(contrastRatio).toBeGreaterThanOrEqual(minRatio);
-    });
-  });
-  
-  test('delete buttons have sufficient contrast', () => {
-    const deleteSelectors = ['.btn-delete-task', '.btn-delete-link'];
+    if (!style) {
+      console.warn(`No styles found for ${selector}`);
+      return;
+    }
     
-    deleteSelectors.forEach(selector => {
-      const style = buttonStyles[selector];
-      if (!style) {
-        console.warn(`No styles found for ${selector}`);
-        return;
-      }
-      
-      const textColor = getTextColorFromStyle(style);
-      const bgColor = getBackgroundColorFromStyle(style);
-      const fontSize = fontSizeToPixels(style.fontSize);
-      const fontWeight = fontWeightToNumeric(style.fontWeight);
-      const isLarge = isLargeText(fontSize, fontWeight);
-      const contrastRatio = calculateContrastRatio(textColor, bgColor);
-      const minRatio = isLarge ? 3.0 : 4.5;
-      
-      expect(contrastRatio).toBeGreaterThanOrEqual(minRatio);
-    });
+    const textColor = getTextColorFromStyle(style, cssVars);
+    const bgColor = getBackgroundColorFromStyle(style);
+    const fontSize = fontSizeToPixels(style.fontSize);
+    const fontWeight = fontWeightToNumeric(style.fontWeight);
+    const isLarge = isLargeText(fontSize, fontWeight);
+    const contrastRatio = calculateContrastRatio(textColor, bgColor);
+    const minRatio = isLarge ? 3.0 : 4.5;
+    
+    expect(contrastRatio).toBeGreaterThanOrEqual(minRatio);
   });
   
   test('contrast ratio calculation is accurate for known color pairs', () => {

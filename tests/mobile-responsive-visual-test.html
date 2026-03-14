@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Responsive Styles - Visual Test</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .test-info {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+            font-size: 14px;
+        }
+        
+        .test-info span {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        
+        body {
+            padding-top: 50px;
+        }
+        
+        .test-instructions {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px;
+            font-size: 14px;
+        }
+        
+        .test-instructions h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+        
+        .test-instructions ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        
+        .test-instructions li {
+            margin: 4px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        Viewport: <span id="viewport-width">0</span>px × <span id="viewport-height">0</span>px
+        | Breakpoint: <span id="breakpoint">Desktop</span>
+    </div>
+    
+    <div class="test-instructions">
+        <h3>📱 Mobile Responsive Styles Test - Task 12.1</h3>
+        <p><strong>How to test:</strong></p>
+        <ul>
+            <li>Resize your browser window to different widths (or use DevTools device emulation)</li>
+            <li>Test at: 320px, 375px, 480px, 767px, 768px, 1024px</li>
+            <li>Verify the following requirements:</li>
+        </ul>
+        <p><strong>Requirements to verify:</strong></p>
+        <ul>
+            <li><strong>11.1:</strong> Single column layout on mobile (≤767px)</li>
+            <li><strong>11.2:</strong> Reduced spacing on mobile (smaller gaps and padding)</li>
+            <li><strong>11.3:</strong> Touch targets are minimum 44×44px (buttons, inputs, checkboxes)</li>
+            <li><strong>11.5:</strong> Simplified animations (reduced transform values)</li>
+            <li><strong>Glassmorphism:</strong> Frosted glass effects maintained on all screen sizes</li>
+        </ul>
+    </div>
+    
+    <div class="dashboard">
+        <header class="dashboard-header">
+            <h1>Productivity Dashboard</h1>
+        </header>
+        
+        <main class="dashboard-main">
+            <!-- Greeting Component -->
+            <section class="component-section">
+                <div class="greeting-component">
+                    <div class="greeting-message">Good Morning, User!</div>
+                    <div class="time-display">10:30</div>
+                    <div class="date-display">Monday, January 15, 2024</div>
+                    <div class="name-edit-container">
+                        <input type="text" class="name-input" value="User" placeholder="Your name">
+                        <button class="btn-edit-name">Edit Name</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Focus Timer Component -->
+            <section class="component-section">
+                <div class="focus-timer-component">
+                    <div class="timer-display">25:00</div>
+                    <div class="timer-controls">
+                        <button class="btn-start">Start</button>
+                        <button class="btn-stop">Stop</button>
+                        <button class="btn-reset">Reset</button>
+                    </div>
+                    <div class="duration-config">
+                        <label for="duration">Duration (minutes):</label>
+                        <input type="number" id="duration" class="duration-input" value="25" min="1" max="60">
+                        <button class="btn-set-duration">Set Duration</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Task List Component -->
+            <section class="component-section">
+                <div class="task-list-component">
+                    <h2 style="margin-bottom: 16px; font-size: 1.5rem;">Tasks</h2>
+                    <div class="task-input-container">
+                        <div>
+                            <input type="text" class="task-input" placeholder="Add a new task">
+                            <button class="btn-add-task">Add Task</button>
+                        </div>
+                    </div>
+                    <ul class="task-list">
+                        <li class="task-item">
+                            <input type="checkbox" class="task-checkbox" id="task1">
+                            <span class="task-text">Complete project documentation</span>
+                            <button class="btn-edit-task">Edit</button>
+                            <button class="btn-delete-task">Delete</button>
+                        </li>
+                        <li class="task-item completed">
+                            <input type="checkbox" class="task-checkbox" id="task2" checked>
+                            <span class="task-text">Review pull requests</span>
+                            <button class="btn-edit-task">Edit</button>
+                            <button class="btn-delete-task">Delete</button>
+                        </li>
+                        <li class="task-item">
+                            <input type="checkbox" class="task-checkbox" id="task3">
+                            <span class="task-text">Update dependencies</span>
+                            <button class="btn-edit-task">Edit</button>
+                            <button class="btn-delete-task">Delete</button>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Quick Links Component -->
+            <section class="component-section">
+                <div class="quick-links-component">
+                    <h2 style="margin-bottom: 16px; font-size: 1.5rem;">Quick Links</h2>
+                    <div class="link-input-container">
+                        <input type="text" class="link-name-input" placeholder="Link name">
+                        <input type="url" class="link-url-input" placeholder="https://example.com">
+                        <button class="btn-add-link">Add Link</button>
+                    </div>
+                    <div class="links-grid">
+                        <div class="link-button">
+                            <a href="https://github.com" target="_blank">GitHub</a>
+                            <button class="btn-delete-link" aria-label="Delete link">×</button>
+                        </div>
+                        <div class="link-button">
+                            <a href="https://stackoverflow.com" target="_blank">Stack Overflow</a>
+                            <button class="btn-delete-link" aria-label="Delete link">×</button>
+                        </div>
+                        <div class="link-button">
+                            <a href="https://developer.mozilla.org" target="_blank">MDN Docs</a>
+                            <button class="btn-delete-link" aria-label="Delete link">×</button>
+                        </div>
+                        <div class="link-button">
+                            <a href="https://css-tricks.com" target="_blank">CSS-Tricks</a>
+                            <button class="btn-delete-link" aria-label="Delete link">×</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script>
+        // Update viewport info
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            document.getElementById('viewport-width').textContent = width;
+            document.getElementById('viewport-height').textContent = height;
+            
+            let breakpoint = 'Desktop (≥1024px)';
+            if (width <= 480) {
+                breakpoint = 'Extra Small Mobile (≤480px)';
+            } else if (width <= 767) {
+                breakpoint = 'Mobile (481px-767px)';
+            } else if (width <= 1023) {
+                breakpoint = 'Tablet (768px-1023px)';
+            }
+            
+            document.getElementById('breakpoint').textContent = breakpoint;
+        }
+        
+        // Update on load and resize
+        updateViewportInfo();
+        window.addEventListener('resize', updateViewportInfo);
+        
+        // Add some interactivity for testing
+        document.querySelector('.btn-start').addEventListener('click', function() {
+            const timerDisplay = document.querySelector('.timer-display');
+            timerDisplay.classList.add('running');
+            setTimeout(() => timerDisplay.classList.remove('running'), 2000);
+        });
+        
+        document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const taskItem = this.closest('.task-item');
+                const taskText = taskItem.querySelector('.task-text');
+                
+                if (this.checked) {
+                    taskItem.classList.add('completed');
+                } else {
+                    taskItem.classList.remove('completed');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

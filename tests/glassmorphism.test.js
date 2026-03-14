@@ -86,11 +86,11 @@ describe('Glassmorphism Component Styling', () => {
       expect(css).toMatch(/box-shadow:\s*var\(--shadow-lg\)/);
     });
 
-    test('should have smooth transitions with cubic-bezier easing', () => {
+    test('should have smooth transitions for GPU-accelerated properties only (Requirement 12.1)', () => {
       const css = readFileSync(join(process.cwd(), 'css/styles.css'), 'utf-8');
       
-      // Check for transition with cubic-bezier
-      expect(css).toMatch(/transition:\s*all\s+0\.3s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\)/);
+      // Check for transition with GPU-accelerated properties (transform, opacity)
+      expect(css).toMatch(/transition:\s*transform\s+0\.3s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\)/);
     });
   });
 
@@ -152,11 +152,13 @@ describe('Glassmorphism Component Styling', () => {
   });
 
   describe('GPU Acceleration', () => {
-    test('should have will-change property for performance', () => {
+    test('should use will-change sparingly only during hover (Requirement 12.3)', () => {
       const css = readFileSync(join(process.cwd(), 'css/styles.css'), 'utf-8');
       
-      // Check for will-change property
-      expect(css).toMatch(/will-change:\s*transform,\s*box-shadow/);
+      // Check that will-change is used only during hover states
+      expect(css).toMatch(/\.component-section:hover\s*{[^}]*will-change:\s*transform/s);
+      // Check that will-change is removed after hover
+      expect(css).toMatch(/\.component-section:not\(:hover\)\s*{[^}]*will-change:\s*auto/s);
     });
   });
 

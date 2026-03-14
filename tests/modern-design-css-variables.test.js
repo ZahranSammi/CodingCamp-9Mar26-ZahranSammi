@@ -104,17 +104,17 @@ describe('Modern Design CSS Variables', () => {
 
   describe('Semantic Colors', () => {
     test('should define success colors', () => {
-      expect(cssContent).toContain('--color-success: hsl(145, 65%, 45%)');
-      expect(cssContent).toContain('--color-success-dark: hsl(145, 65%, 35%)');
+      expect(cssContent).toContain('--color-success: hsl(145, 65%, 32%)');
+      expect(cssContent).toContain('--color-success-dark: hsl(145, 65%, 28%)');
     });
 
     test('should define danger colors', () => {
-      expect(cssContent).toContain('--color-danger: hsl(0, 70%, 55%)');
-      expect(cssContent).toContain('--color-danger-dark: hsl(0, 70%, 45%)');
+      expect(cssContent).toContain('--color-danger: hsl(0, 70%, 42%)');
+      expect(cssContent).toContain('--color-danger-dark: hsl(0, 70%, 38%)');
     });
 
     test('should define warning color', () => {
-      expect(cssContent).toContain('--color-warning: hsl(40, 95%, 55%)');
+      expect(cssContent).toContain('--color-warning: hsl(40, 95%, 42%)');
     });
   });
 
@@ -160,12 +160,12 @@ describe('Modern Design CSS Variables', () => {
       });
     });
 
-    test('should map legacy primary to primary-500', () => {
-      expect(cssContent).toContain('--color-primary: var(--color-primary-500)');
+    test('should map legacy primary to primary-600', () => {
+      expect(cssContent).toContain('--color-primary: var(--color-primary-600)');
     });
 
-    test('should map legacy primary-dark to primary-600', () => {
-      expect(cssContent).toContain('--color-primary-dark: var(--color-primary-600)');
+    test('should map legacy primary-dark to primary-700', () => {
+      expect(cssContent).toContain('--color-primary-dark: var(--color-primary-700)');
     });
 
     test('should map legacy text colors to neutral palette', () => {

@@ -65,8 +65,9 @@ describe('Task 3.1: Primary Action Button Styling', () => {
       expect(cssContent).toMatch(/\.btn-reset\s*{[^}]*box-shadow:\s*var\(--shadow-md\)/);
     });
 
-    test('should have smooth transitions', () => {
-      expect(cssContent).toMatch(/\.btn-start,\s*\.btn-stop,\s*\.btn-reset\s*{[^}]*transition:\s*all\s+0\.2s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\)/);
+    test('should have smooth transitions with GPU-accelerated properties', () => {
+      // Per Requirement 12.1, only GPU-accelerated properties (transform, opacity) should be animated
+      expect(cssContent).toMatch(/\.btn-start,\s*\.btn-stop,\s*\.btn-reset\s*{[^}]*transition:\s*transform\s+0\.2s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\),\s*opacity\s+0\.2s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\)/);
     });
   });
 
@@ -99,8 +100,9 @@ describe('Task 3.1: Primary Action Button Styling', () => {
       expect(cssContent).toMatch(/\.btn-add-task\s*{[^}]*box-shadow:\s*var\(--shadow-md\)/);
     });
 
-    test('should have smooth transitions', () => {
-      expect(cssContent).toMatch(/\.btn-add-task\s*{[^}]*transition:\s*all\s+0\.2s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\)/);
+    test('should have smooth transitions with GPU-accelerated properties', () => {
+      // Per Requirement 12.1, only GPU-accelerated properties (transform, opacity) should be animated
+      expect(cssContent).toMatch(/\.btn-add-task\s*{[^}]*transition:\s*transform\s+0\.2s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\),\s*opacity\s+0\.2s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\)/);
     });
   });
 
@@ -133,8 +135,9 @@ describe('Task 3.1: Primary Action Button Styling', () => {
       expect(cssContent).toMatch(/\.btn-add-link\s*{[^}]*box-shadow:\s*var\(--shadow-md\)/);
     });
 
-    test('should have smooth transitions', () => {
-      expect(cssContent).toMatch(/\.btn-add-link\s*{[^}]*transition:\s*all\s+0\.2s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\)/);
+    test('should have smooth transitions with GPU-accelerated properties', () => {
+      // Per Requirement 12.1, only GPU-accelerated properties (transform, opacity) should be animated
+      expect(cssContent).toMatch(/\.btn-add-link\s*{[^}]*transition:\s*transform\s+0\.2s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\),\s*opacity\s+0\.2s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\)/);
     });
   });
 

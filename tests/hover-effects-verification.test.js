@@ -95,26 +95,34 @@ describe('Task 2.2: Component Card Hover Effects Verification', () => {
       expect(hoverStyles).toMatch(/border-color:\s*rgba\(255,\s*255,\s*255,\s*0\.5\)/);
     });
 
-    test('should have smooth transition for hover effects', () => {
+    test('should have smooth transition for hover effects with GPU-accelerated properties', () => {
       // Verify transition is defined with cubic-bezier easing
+      // Per Requirement 12.1, only GPU-accelerated properties (transform, opacity) should be animated
       const baseRuleMatch = css.match(/\.component-section\s*{([^}]*)}/);
       expect(baseRuleMatch).not.toBeNull();
       
       const baseStyles = baseRuleMatch[1];
       
-      // Verify smooth transition with cubic-bezier easing
-      expect(baseStyles).toMatch(/transition:\s*all\s+0\.3s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\)/);
+      // Verify smooth transition with cubic-bezier easing for GPU-accelerated properties
+      expect(baseStyles).toMatch(/transition:\s*transform\s+0\.3s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\),\s*opacity\s+0\.3s\s+cubic-bezier\(0\.4,\s*0,\s*0\.2,\s*1\)/);
     });
 
-    test('should optimize hover effects for GPU acceleration', () => {
-      // Verify will-change property is set for performance
-      const baseRuleMatch = css.match(/\.component-section\s*{([^}]*)}/);
-      expect(baseRuleMatch).not.toBeNull();
+    test('should optimize hover effects for GPU acceleration with will-change during hover only', () => {
+      // Per Requirement 12.3, will-change should only be set during hover, not in base styles
+      const hoverRuleMatch = css.match(/\.component-section:hover\s*{([^}]*)}/);
+      expect(hoverRuleMatch).not.toBeNull();
       
-      const baseStyles = baseRuleMatch[1];
+      const hoverStyles = hoverRuleMatch[1];
       
-      // Verify will-change includes transform and box-shadow
-      expect(baseStyles).toMatch(/will-change:\s*transform,\s*box-shadow/);
+      // Verify will-change is set during hover
+      expect(hoverStyles).toMatch(/will-change:\s*transform/);
+      
+      // Verify will-change is removed after hover
+      const notHoverRuleMatch = css.match(/\.component-section:not\(:hover\)\s*{([^}]*)}/);
+      expect(notHoverRuleMatch).not.toBeNull();
+      
+      const notHoverStyles = notHoverRuleMatch[1];
+      expect(notHoverStyles).toMatch(/will-change:\s*auto/);
     });
   });
 

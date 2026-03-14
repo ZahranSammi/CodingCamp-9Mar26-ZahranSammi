@@ -308,7 +308,8 @@ describe('GreetingComponent - Property 4: User Name in Greeting Format', () => {
         // Generate random greetings from the valid set
         fc.constantFrom("Good Morning", "Good Afternoon", "Good Evening", "Good Night"),
         // Generate random non-empty user names (1-50 characters)
-        fc.string({ minLength: 1, maxLength: 50 }).filter(s => s.trim().length > 0),
+        // Filter out invalid usernames (empty or whitespace-only after trimming)
+        fc.string({ minLength: 1, maxLength: 50 }).filter(s => s.trim().length > 0 && /\S/.test(s)),
         (greeting, userName) => {
           const result = formatGreetingMessage(greeting, userName);
           

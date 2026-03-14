@@ -10,22 +10,25 @@
     <div class="dashboard">
         <header class="dashboard-header">
             <h1>Productivity Dashboard</h1>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
         </header>
         
         <main class="dashboard-main">
-            <section id="greeting-container" class="component-section">
+            <section id="greeting-container" class="component-section" aria-label="Greeting and Time">
                 <!-- GreetingComponent will be rendered here -->
             </section>
             
-            <section id="timer-container" class="component-section">
+            <section id="timer-container" class="component-section" aria-label="Focus Timer">
                 <!-- FocusTimerComponent will be rendered here -->
             </section>
             
-            <section id="tasks-container" class="component-section">
+            <section id="tasks-container" class="component-section" aria-label="Task List">
                 <!-- TaskListComponent will be rendered here -->
             </section>
             
-            <section id="links-container" class="component-section">
+            <section id="links-container" class="component-section" aria-label="Quick Links">
                 <!-- QuickLinksComponent will be rendered here -->
             </section>
         </main>

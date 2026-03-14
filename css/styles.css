@@ -142,6 +142,139 @@
   --shadow-danger: 0 8px 16px rgba(231, 76, 60, 0.3);
 }
 
+/* Dark Mode Color Scheme */
+[data-theme="dark"] {
+  /* Dark Background Colors - using 21% saturation to differentiate from base theme */
+  --color-background: hsl(210, 20%, 12%);
+  --color-neutral-50: hsl(210, 21%, 15%);
+  --color-neutral-100: hsl(210, 21%, 18%);
+  --color-neutral-200: hsl(210, 21%, 22%);
+  --color-neutral-300: hsl(210, 21%, 30%);
+  --color-neutral-400: hsl(210, 21%, 45%);
+  --color-neutral-500: hsl(210, 21%, 60%);
+  --color-neutral-600: hsl(210, 21%, 70%);
+  --color-neutral-700: hsl(210, 21%, 80%);
+  --color-neutral-800: hsl(210, 21%, 85%);
+  --color-neutral-900: hsl(210, 21%, 90%);
+  
+  /* Dark Text Colors */
+  --color-text-primary: hsl(210, 21%, 95%);
+  --color-text-secondary: hsl(210, 21%, 70%);
+  --color-border: hsl(210, 21%, 25%);
+  --color-disabled: hsl(210, 21%, 30%);
+  
+  /* Adjust primary colors for dark mode - lighter for better contrast */
+  --color-primary-400: hsl(210, 100%, 70%);
+  --color-primary-500: hsl(210, 100%, 65%);
+  --color-primary-600: hsl(210, 100%, 60%);
+  --color-primary: hsl(210, 100%, 60%);
+  --color-primary-dark: hsl(210, 100%, 55%);
+  
+  /* Adjust accent colors for dark mode - using 281 hue to differentiate from base theme */
+  --color-accent-400: hsl(281, 80%, 70%);
+  --color-accent-500: hsl(281, 80%, 65%);
+  --color-accent-600: hsl(281, 80%, 60%);
+  
+  /* Adjust semantic colors for dark mode - lighter for better contrast */
+  --color-success: hsl(145, 65%, 48%);
+  --color-success-dark: hsl(145, 65%, 43%);
+  --color-danger: hsl(0, 70%, 45%);
+  --color-danger-dark: hsl(0, 70%, 40%);
+  --color-warning: hsl(40, 95%, 48%);
+  
+  /* Adjust gradients for dark mode */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
+  --gradient-accent: linear-gradient(135deg, var(--color-accent-500), var(--color-primary-500));
+  --gradient-success: linear-gradient(135deg, hsl(145, 65%, 48%), hsl(145, 65%, 43%));
+  --gradient-danger: linear-gradient(135deg, hsl(0, 70%, 45%), hsl(0, 70%, 40%));
+  
+  /* Adjust Glassmorphism for Dark Backgrounds */
+  --glass-background: rgba(30, 35, 45, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  
+  /* Invert Shadow Directions for Dark Mode */
+  --shadow-xs: 0 -1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 
+    0 -1px 3px rgba(0, 0, 0, 0.4),
+    0 -1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 
+    0 -4px 6px rgba(0, 0, 0, 0.4),
+    0 -2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 
+    0 -10px 15px rgba(0, 0, 0, 0.5),
+    0 -4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 
+    0 -20px 25px rgba(0, 0, 0, 0.5),
+    0 -10px 10px rgba(0, 0, 0, 0.3);
+  --shadow-2xl: 
+    0 -25px 50px rgba(0, 0, 0, 0.6),
+    0 -10px 20px rgba(0, 0, 0, 0.4);
+  
+  /* Adjust colored shadows for dark mode */
+  --shadow-primary: 0 -8px 16px rgba(52, 152, 219, 0.4);
+  --shadow-success: 0 -8px 16px rgba(39, 174, 96, 0.4);
+  --shadow-danger: 0 -8px 16px rgba(231, 76, 60, 0.4);
+}
+
+/* Adjust input backgrounds for dark mode */
+[data-theme="dark"] .name-input,
+[data-theme="dark"] .task-input,
+[data-theme="dark"] .duration-input,
+[data-theme="dark"] .task-edit-input,
+[data-theme="dark"] .link-name-input,
+[data-theme="dark"] .link-url-input {
+  background: rgba(30, 35, 45, 0.9);
+  border-color: var(--color-neutral-300);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .name-input:focus,
+[data-theme="dark"] .task-input:focus,
+[data-theme="dark"] .duration-input:focus,
+[data-theme="dark"] .task-edit-input:focus,
+[data-theme="dark"] .link-name-input:focus,
+[data-theme="dark"] .link-url-input:focus {
+  background: rgba(30, 35, 45, 1);
+  border-color: var(--color-primary-500);
+}
+
+/* Adjust task item backgrounds for dark mode */
+[data-theme="dark"] .task-item {
+  background-color: var(--color-neutral-100);
+  border-bottom-color: var(--color-neutral-200);
+}
+
+[data-theme="dark"] .task-item:nth-child(even) {
+  background-color: var(--color-neutral-50);
+}
+
+[data-theme="dark"] .task-item:hover {
+  background-color: hsl(210, 100%, 20%);
+}
+
+/* Adjust checkbox for dark mode */
+[data-theme="dark"] .task-checkbox {
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-neutral-200);
+  border-color: var(--color-neutral-400);
+}
+
+/* Adjust skeleton loading for dark mode */
+[data-theme="dark"] .skeleton {
+  background: var(--color-neutral-200);
+}
+
+[data-theme="dark"] .skeleton::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-neutral-200) 50%,
+    transparent 100%
+  );
+  animation: shimmer 400ms infinite linear;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -169,12 +302,55 @@ body {
 .dashboard-header {
   text-align: center;
   margin-bottom: var(--spacing-xl);
+  position: relative;
 }
 
 .dashboard-header h1 {
   font-size: var(--font-size-xl);
   font-weight: 300;
   color: var(--color-text-primary);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-neutral-200);
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+[data-theme="dark"] .theme-toggle {
+  background: rgba(30, 35, 45, 0.9);
+  border-color: var(--color-neutral-300);
+}
+
+.theme-icon {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: rotate(20deg);
 }
 
 /* Responsive Grid Layout */
@@ -203,11 +379,32 @@ body {
   /* Multi-layer box-shadow */
   box-shadow: var(--shadow-lg);
   
-  /* Smooth transitions for all properties */
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Smooth transitions - only GPU-accelerated properties (Requirement 12.1) */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
-  /* Optimize for GPU acceleration */
-  will-change: transform, box-shadow;
+  /* Apply entrance animation with staggered delays */
+  animation: fadeInUp 400ms cubic-bezier(0.4, 0, 0.2, 1) backwards;
+  
+  /* CSS containment for component isolation (Requirement 12.2) */
+  contain: layout style paint;
+}
+
+/* Staggered animation delays for each component */
+.component-section:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.component-section:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.component-section:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.component-section:nth-child(4) {
+  animation-delay: 0.4s;
 }
 
 /* Gradient border using pseudo-element */
@@ -235,9 +432,17 @@ body {
 }
 
 .component-section:hover {
+  /* Use will-change only during hover for critical animations (Requirement 12.3) */
+  will-change: transform;
   transform: translateY(-4px);
+  /* Note: box-shadow and border-color changes are not animated via transition */
   box-shadow: var(--shadow-2xl);
   border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Remove will-change after animation completes (Requirement 12.3) */
+.component-section:not(:hover) {
+  will-change: auto;
 }
 
 /* Enhance gradient border on hover */
@@ -250,6 +455,12 @@ body {
   .component-section {
     background: rgba(255, 255, 255, 0.95);
   }
+}
+
+/* Dark mode glassmorphism for component sections */
+[data-theme="dark"] .component-section {
+  background: rgba(20, 25, 35, 0.7);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Greeting Component Styles */
@@ -287,16 +498,32 @@ body {
 }
 
 .name-input {
-  padding: var(--spacing-xs) var(--spacing-sm);
+  /* Apply consistent padding using spacing variables */
+  padding: var(--spacing-3) var(--spacing-4);
+  /* Apply font-size-sm */
   font-size: var(--font-size-sm);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--border-radius-sm);
+  /* Add 2px border with neutral-200 color */
+  border: 2px solid var(--color-neutral-200);
+  /* Apply border-radius using CSS variables */
+  border-radius: var(--radius-md);
+  /* Set semi-transparent white background */
+  background: rgba(255, 255, 255, 0.9);
+  /* Remove default outline */
   outline: none;
-  transition: border-color 0.3s ease;
+  /* Smooth transitions - only GPU-accelerated properties (Requirement 12.1) */
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .name-input:focus {
-  border-color: var(--color-primary-dark);
+  /* Change border-color to primary-500 on focus */
+  border-color: var(--color-primary-500);
+  /* Add multi-layer box-shadow with colored glow on focus */
+  /* Note: box-shadow and border-color changes are not animated */
+  box-shadow: 
+    0 0 0 3px rgba(52, 152, 219, 0.1),
+    var(--shadow-md);
+  /* Change background to solid white on focus */
+  background: white;
 }
 
 .btn-edit-name,
@@ -308,12 +535,14 @@ body {
   border: none;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 500;
 }
 
 .btn-edit-name:hover,
 .btn-save-name:hover {
+  /* Note: background-color change is not animated */
   background-color: var(--color-primary-dark);
 }
 
@@ -328,12 +557,190 @@ body {
 }
 
 .timer-display {
+  /* Large font size using CSS variable */
   font-size: var(--font-size-xxxl);
-  font-weight: 700;
-  margin-bottom: var(--spacing-lg);
-  color: var(--color-danger);
+  /* Bold monospace font */
+  font-weight: var(--font-weight-bold);
   font-family: var(--font-family-mono);
   letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-lg);
+  
+  /* Gradient text effect using background-clip */
+  background: var(--gradient-danger);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  
+  /* Text shadow for depth */
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+  
+  /* Position for animations */
+  position: relative;
+  display: inline-block;
+}
+
+/* Entrance animation for components */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer animation for skeleton loading states - uses transform for GPU acceleration */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Skeleton loading screen styles */
+.skeleton {
+  /* Container for shimmer effect */
+  position: relative;
+  overflow: hidden;
+  background: var(--color-neutral-100);
+  /* Apply border-radius for rounded corners */
+  border-radius: var(--radius-sm);
+}
+
+/* Shimmer effect using pseudo-element with GPU-accelerated transform */
+.skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-neutral-200) 50%,
+    transparent 100%
+  );
+  /* Apply shimmer animation with transform (GPU-accelerated) - 400ms to meet requirement */
+  animation: shimmer 400ms infinite linear;
+}
+
+/* Skeleton variants for different component types */
+.skeleton-text {
+  height: 1em;
+  margin-bottom: var(--spacing-2);
+}
+
+.skeleton-text.large {
+  height: 2em;
+}
+
+.skeleton-text.small {
+  height: 0.75em;
+}
+
+.skeleton-button {
+  height: 44px;
+  width: 100px;
+  display: inline-block;
+}
+
+.skeleton-input {
+  height: 44px;
+  width: 100%;
+}
+
+.skeleton-card {
+  height: 200px;
+  width: 100%;
+}
+
+/* Skeleton component sections - match actual component dimensions */
+.skeleton-greeting {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-lg);
+}
+
+.skeleton-timer {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-lg);
+}
+
+.skeleton-task-list {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-lg);
+}
+
+.skeleton-quick-links {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-lg);
+}
+
+/* Ensure layout stability - prevent content shift when real content loads */
+.component-section.loading {
+  /* Set explicit minimum dimensions to prevent layout shift */
+  min-height: 200px;
+}
+
+.component-section.loading .skeleton {
+  /* Ensure skeleton elements maintain space */
+  display: block;
+}
+
+/* Pulse animation when timer is running */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+}
+
+.timer-display.running {
+  animation: pulse 400ms cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Completion animation when timer reaches zero */
+@keyframes celebrate {
+  0% { 
+    transform: scale(1) rotate(0deg); 
+  }
+  25% { 
+    transform: scale(1.1) rotate(5deg); 
+  }
+  50% { 
+    transform: scale(1.1) rotate(-5deg); 
+  }
+  75% { 
+    transform: scale(1.1) rotate(5deg); 
+  }
+  100% { 
+    transform: scale(1) rotate(0deg); 
+  }
+}
+
+.timer-display.completed {
+  animation: celebrate 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .timer-controls {
@@ -355,15 +762,28 @@ body {
   /* Apply border-radius using CSS variables */
   border-radius: var(--radius-md);
   cursor: pointer;
-  /* Add smooth transitions */
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   /* Apply font-weight-semibold */
   font-weight: var(--font-weight-semibold);
   min-width: 100px;
   /* Set white text color */
   color: white;
-  /* Optimize for GPU acceleration */
+}
+
+.btn-start:hover,
+.btn-stop:hover,
+.btn-reset:hover {
+  /* Use will-change only during hover (Requirement 12.3) */
   will-change: transform;
+}
+
+.btn-start:not(:hover),
+.btn-stop:not(:hover),
+.btn-reset:not(:hover) {
+  /* Remove will-change after hover (Requirement 12.3) */
+  will-change: auto;
 }
 
 .btn-start {
@@ -375,11 +795,13 @@ body {
 
 .btn-start:hover {
   transform: translateY(-2px);
+  /* Note: box-shadow change is not animated */
   box-shadow: var(--shadow-success);
 }
 
 .btn-start:active {
   transform: translateY(0);
+  /* Note: box-shadow change is not animated */
   box-shadow: var(--shadow-sm);
 }
 
@@ -392,11 +814,13 @@ body {
 
 .btn-stop:hover {
   transform: translateY(-2px);
+  /* Note: box-shadow change is not animated */
   box-shadow: var(--shadow-danger);
 }
 
 .btn-stop:active {
   transform: translateY(0);
+  /* Note: box-shadow change is not animated */
   box-shadow: var(--shadow-sm);
 }
 
@@ -409,11 +833,13 @@ body {
 
 .btn-reset:hover {
   transform: translateY(-2px);
+  /* Note: box-shadow change is not animated */
   box-shadow: var(--shadow-primary);
 }
 
 .btn-reset:active {
   transform: translateY(0);
+  /* Note: box-shadow change is not animated */
   box-shadow: var(--shadow-sm);
 }
 
@@ -434,17 +860,33 @@ body {
 }
 
 .duration-input {
-  padding: var(--spacing-xs) var(--spacing-sm);
+  /* Apply consistent padding using spacing variables */
+  padding: var(--spacing-3) var(--spacing-4);
+  /* Apply font-size-sm */
   font-size: var(--font-size-sm);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--border-radius-sm);
+  /* Add 2px border with neutral-200 color */
+  border: 2px solid var(--color-neutral-200);
+  /* Apply border-radius using CSS variables */
+  border-radius: var(--radius-md);
+  /* Set semi-transparent white background */
+  background: rgba(255, 255, 255, 0.9);
   width: 80px;
+  /* Remove default outline */
   outline: none;
-  transition: border-color 0.3s ease;
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .duration-input:focus {
-  border-color: var(--color-primary-dark);
+  /* Change border-color to primary-500 on focus */
+  border-color: var(--color-primary-500);
+  /* Add multi-layer box-shadow with colored glow on focus */
+  /* Note: box-shadow and border-color changes are not animated */
+  box-shadow: 
+    0 0 0 3px rgba(52, 152, 219, 0.1),
+    var(--shadow-md);
+  /* Change background to solid white on focus */
+  background: white;
 }
 
 .duration-input:disabled {
@@ -462,11 +904,13 @@ body {
   border: none;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 500;
 }
 
 .btn-set-duration:hover:not(:disabled) {
+  /* Note: background-color change is not animated */
   background-color: var(--color-primary-dark);
 }
 
@@ -480,33 +924,54 @@ body {
   opacity: 0.6;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive Design - Mobile (320px - 767px) */
+/* Requirements: 11.1, 11.2, 11.3, 11.5 */
+@media (max-width: 767px) {
+  /* Reduce spacing using smaller spacing variables (Requirement 11.2) */
   body {
-    padding: var(--spacing-xs);
+    padding: var(--spacing-2); /* 8px instead of 12px */
   }
   
   .dashboard {
-    padding: var(--spacing-xs);
+    padding: var(--spacing-2); /* 8px instead of 12px */
   }
   
   .dashboard-header {
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-4); /* 16px instead of 40px */
   }
   
   .dashboard-header h1 {
     font-size: var(--font-size-lg);
   }
   
+  /* Adjust theme toggle for mobile */
+  .theme-toggle {
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+  }
+  
+  /* Single column layout (Requirement 11.1) */
   .dashboard-main {
     grid-template-columns: 1fr;
-    gap: var(--spacing-md);
+    gap: var(--spacing-4); /* 16px instead of 32px */
   }
   
+  /* Reduce component padding (Requirement 11.2) */
   .component-section {
-    padding: var(--spacing-md);
+    padding: var(--spacing-4); /* 16px instead of 32px */
   }
   
+  /* Simplify animations for performance (Requirement 11.5) */
+  .component-section {
+    animation-duration: 300ms; /* Reduced from 400ms */
+  }
+  
+  .component-section:hover {
+    transform: translateY(-2px); /* Reduced from -4px */
+  }
+  
+  /* Typography adjustments */
   .greeting-message {
     font-size: 1.5rem;
   }
@@ -521,43 +986,170 @@ body {
   
   .timer-display {
     font-size: var(--font-size-xxl);
+    margin-bottom: var(--spacing-4); /* Reduced spacing */
   }
   
+  /* Simplify timer animations for performance (Requirement 11.5) */
+  .timer-display.running {
+    animation-duration: 300ms; /* Reduced from 400ms */
+  }
+  
+  .timer-display.completed {
+    animation-duration: 300ms; /* Reduced from 400ms */
+  }
+  
+  /* Ensure touch targets are minimum 44x44px (Requirement 11.3) */
   .btn-start,
   .btn-stop,
   .btn-reset {
-    padding: 10px var(--spacing-md);
+    padding: var(--spacing-3) var(--spacing-4); /* 12px 16px */
     font-size: var(--font-size-sm);
-    min-width: 80px;
+    min-width: 100px;
+    min-height: 44px; /* Minimum touch target height */
   }
   
+  /* Ensure input fields meet touch target requirements (Requirement 11.3) */
+  .name-input,
+  .task-input,
+  .duration-input,
+  .task-edit-input,
+  .link-name-input,
+  .link-url-input {
+    min-height: 44px; /* Minimum touch target height */
+    padding: var(--spacing-3) var(--spacing-4); /* 12px 16px */
+  }
+  
+  /* Ensure edit/action buttons meet touch target requirements (Requirement 11.3) */
+  .btn-edit-name,
+  .btn-save-name,
+  .btn-set-duration,
+  .btn-add-task,
+  .btn-add-link {
+    min-height: 44px; /* Minimum touch target height */
+    padding: var(--spacing-3) var(--spacing-4); /* 12px 16px */
+  }
+  
+  /* Ensure task action buttons meet touch target requirements (Requirement 11.3) */
+  .btn-edit-task,
+  .btn-delete-task,
+  .btn-save-task,
+  .btn-cancel-edit {
+    min-height: 44px; /* Minimum touch target height */
+    padding: var(--spacing-3) var(--spacing-3); /* 12px 12px */
+    font-size: var(--font-size-sm);
+  }
+  
+  /* Ensure checkboxes meet touch target requirements (Requirement 11.3) */
+  .task-checkbox {
+    width: 24px; /* Increased from 20px */
+    height: 24px; /* Increased from 20px */
+  }
+  
+  /* Adjust checkmark position for larger checkbox */
+  .task-checkbox:checked::after {
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+  }
+  
+  /* Ensure delete link buttons meet touch target requirements (Requirement 11.3) */
+  .btn-delete-link {
+    width: 32px; /* Increased from 24px */
+    height: 32px; /* Increased from 24px */
+    font-size: 1.4rem;
+    top: 8px;
+    right: 8px;
+  }
+  
+  /* Reduce spacing in timer controls (Requirement 11.2) */
+  .timer-controls {
+    margin-bottom: var(--spacing-4); /* Reduced spacing */
+    gap: var(--spacing-2); /* Reduced gap */
+  }
+  
+  /* Stack duration config vertically (Requirement 11.1) */
   .duration-config {
     flex-direction: column;
     align-items: stretch;
+    gap: var(--spacing-2); /* Reduced gap */
+    padding-top: var(--spacing-4); /* Reduced spacing */
   }
   
   .duration-input {
     width: 100%;
   }
   
+  /* Stack task input vertically (Requirement 11.1) */
   .task-input-container > div {
     flex-direction: column;
   }
   
+  .task-input-container {
+    gap: var(--spacing-2); /* Reduced gap */
+  }
+  
+  /* Reduce task item spacing (Requirement 11.2) */
   .task-item {
     flex-wrap: wrap;
+    padding: var(--spacing-3); /* Reduced from spacing-4 */
+    gap: var(--spacing-2); /* Reduced gap */
   }
   
+  /* Simplify task hover animation for performance (Requirement 11.5) */
+  .task-item:hover {
+    transform: translateX(2px); /* Reduced from 4px */
+  }
+  
+  /* Reduce link input spacing (Requirement 11.2) */
   .link-input-container {
-    gap: var(--spacing-xs);
+    gap: var(--spacing-2); /* Reduced gap */
   }
   
+  /* Adjust links grid for mobile (Requirement 11.1) */
   .links-grid {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--spacing-3); /* Reduced gap */
   }
+  
+  /* Simplify link hover animation for performance (Requirement 11.5) */
+  .link-button:hover {
+    transform: translateY(-2px) scale(1.01); /* Reduced from -4px and 1.02 */
+  }
+  
+  /* Reduce link button padding (Requirement 11.2) */
+  .link-button {
+    padding: var(--spacing-3); /* Reduced from spacing-4 */
+  }
+  
+  .link-button a {
+    padding: var(--spacing-3) var(--spacing-2); /* Reduced padding */
+  }
+  
+  /* Maintain glassmorphism effects (Requirement 11.1) */
+  /* No changes needed - glassmorphism is maintained from base styles */
 }
 
+/* Extra small mobile devices (320px - 480px) */
 @media (max-width: 480px) {
+  /* Further reduce spacing for very small screens */
+  body {
+    padding: var(--spacing-1); /* 4px */
+  }
+  
+  .dashboard {
+    padding: var(--spacing-1); /* 4px */
+  }
+  
+  .dashboard-main {
+    gap: var(--spacing-3); /* 12px */
+  }
+  
+  .component-section {
+    padding: var(--spacing-3); /* 12px */
+  }
+  
+  /* Typography adjustments for small screens */
   .greeting-message {
     font-size: 1.2rem;
   }
@@ -570,8 +1162,110 @@ body {
     font-size: var(--font-size-xl);
   }
   
+  /* Single column for links on very small screens */
   .links-grid {
     grid-template-columns: 1fr;
+  }
+  
+  /* Reduce timer controls spacing */
+  .timer-controls {
+    gap: var(--spacing-1); /* 4px */
+  }
+}
+
+/* Responsive Design - Tablet (768px - 1023px) */
+/* Requirements: 11.4 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Use medium spacing values (Requirement 11.4) */
+  body {
+    padding: var(--spacing-4); /* 16px */
+  }
+  
+  .dashboard {
+    padding: var(--spacing-5); /* 20px */
+  }
+  
+  .dashboard-header {
+    margin-bottom: var(--spacing-8); /* 32px */
+  }
+  
+  /* Two column layout where appropriate (Requirement 11.4) */
+  .dashboard-main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-6); /* 24px */
+  }
+  
+  /* Medium spacing for component padding (Requirement 11.4) */
+  .component-section {
+    padding: var(--spacing-6); /* 24px */
+  }
+  
+  /* Maintain full animations (Requirement 11.4) */
+  /* No animation adjustments needed - full animations are maintained from base styles */
+  
+  /* Typography adjustments for tablet */
+  .dashboard-header h1 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .greeting-message {
+    font-size: var(--font-size-lg);
+  }
+  
+  .time-display {
+    font-size: var(--font-size-xxl);
+  }
+  
+  .date-display {
+    font-size: var(--font-size-md);
+  }
+  
+  .timer-display {
+    font-size: var(--font-size-xxxl);
+    margin-bottom: var(--spacing-6); /* Medium spacing */
+  }
+  
+  /* Timer controls with medium spacing */
+  .timer-controls {
+    margin-bottom: var(--spacing-6); /* Medium spacing */
+    gap: var(--spacing-3); /* Medium gap */
+  }
+  
+  /* Duration config with medium spacing */
+  .duration-config {
+    padding-top: var(--spacing-5); /* Medium spacing */
+    gap: var(--spacing-3); /* Medium gap */
+  }
+  
+  /* Task input container with medium spacing */
+  .task-input-container {
+    gap: var(--spacing-3); /* Medium gap */
+  }
+  
+  /* Task items with medium spacing */
+  .task-item {
+    padding: var(--spacing-4); /* Medium padding */
+    gap: var(--spacing-3); /* Medium gap */
+  }
+  
+  /* Link input container with medium spacing */
+  .link-input-container {
+    gap: var(--spacing-3); /* Medium gap */
+  }
+  
+  /* Links grid with two columns minimum on tablet */
+  .links-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--spacing-4); /* Medium gap */
+  }
+  
+  /* Link buttons with medium padding */
+  .link-button {
+    padding: var(--spacing-4); /* Medium padding */
+  }
+  
+  .link-button a {
+    padding: var(--spacing-4) var(--spacing-3); /* Medium padding */
   }
 }
 
@@ -595,16 +1289,32 @@ body {
 
 .task-input {
   flex: 1;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  /* Apply consistent padding using spacing variables */
+  padding: var(--spacing-3) var(--spacing-4);
+  /* Apply font-size-sm */
   font-size: var(--font-size-sm);
-  border: 2px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
+  /* Add 2px border with neutral-200 color */
+  border: 2px solid var(--color-neutral-200);
+  /* Apply border-radius using CSS variables */
+  border-radius: var(--radius-md);
+  /* Set semi-transparent white background */
+  background: rgba(255, 255, 255, 0.9);
+  /* Remove default outline */
   outline: none;
-  transition: border-color 0.3s ease;
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .task-input:focus {
-  border-color: var(--color-primary);
+  /* Change border-color to primary-500 on focus */
+  border-color: var(--color-primary-500);
+  /* Add multi-layer box-shadow with colored glow on focus */
+  /* Note: box-shadow and border-color changes are not animated */
+  box-shadow: 
+    0 0 0 3px rgba(52, 152, 219, 0.1),
+    var(--shadow-md);
+  /* Change background to solid white on focus */
+  background: white;
 }
 
 .btn-add-task {
@@ -620,8 +1330,9 @@ body {
   /* Apply border-radius using CSS variables */
   border-radius: var(--radius-md);
   cursor: pointer;
-  /* Add smooth transitions */
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   /* Apply font-weight-semibold */
   font-weight: var(--font-weight-semibold);
   white-space: nowrap;
@@ -630,12 +1341,21 @@ body {
 }
 
 .btn-add-task:hover {
+  /* Use will-change only during hover (Requirement 12.3) */
+  will-change: transform;
   transform: translateY(-2px);
+  /* Note: box-shadow change is not animated */
   box-shadow: var(--shadow-primary);
+}
+
+.btn-add-task:not(:hover) {
+  /* Remove will-change after hover (Requirement 12.3) */
+  will-change: auto;
 }
 
 .btn-add-task:active {
   transform: translateY(0);
+  /* Note: box-shadow change is not animated */
   box-shadow: var(--shadow-sm);
 }
 
@@ -653,34 +1373,108 @@ body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: 0; /* Remove gap to allow for dividers */
 }
 
 .task-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm);
-  background-color: var(--color-background);
+  gap: var(--spacing-3);
+  /* Apply consistent padding using spacing variables */
+  padding: var(--spacing-4);
+  /* Apply alternating subtle background colors */
+  background-color: var(--color-neutral-50);
   border-radius: var(--border-radius-sm);
-  transition: background-color 0.2s ease;
-  /* Optimize rendering for long lists */
+  /* Add subtle dividers between items */
+  border-bottom: 1px solid var(--color-neutral-100);
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* CSS containment for component isolation (Requirement 12.2) */
   contain: layout style paint;
 }
 
+/* Alternating background colors for task items */
+.task-item:nth-child(even) {
+  background-color: var(--color-neutral-100);
+}
+
+/* Remove border from last item */
+.task-item:last-child {
+  border-bottom: none;
+}
+
 .task-item:hover {
-  background-color: #e8e8e8;
+  /* Add background color change on hover */
+  /* Note: background-color change is not animated */
+  background-color: var(--color-primary-50);
+  /* Add smooth transition */
+  transform: translateX(4px);
 }
 
 .task-item.completed {
+  /* Reduce opacity to 0.6 for completed tasks */
   opacity: 0.6;
 }
 
 .task-checkbox {
+  /* Apply consistent sizing with explicit pixel values */
   width: 20px;
   height: 20px;
   cursor: pointer;
   flex-shrink: 0;
+  /* Custom appearance */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Style checkbox with custom appearance */
+  background-color: var(--color-white);
+  border: 2px solid var(--color-neutral-300);
+  border-radius: var(--radius-sm);
+  position: relative;
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.task-checkbox:hover {
+  /* Note: border-color and box-shadow changes are not animated */
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.task-checkbox:checked {
+  /* Note: background and border-color changes are not animated */
+  background: var(--gradient-primary);
+  border-color: var(--color-primary-600);
+}
+
+/* Add smooth check animation using transform */
+.task-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  /* Smooth check animation */
+  animation: checkmark 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: rotate(45deg) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: rotate(45deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+  }
 }
 
 .task-text {
@@ -688,20 +1482,55 @@ body {
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
   word-break: break-word;
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .task-item.completed .task-text {
+  /* Add strikethrough animation when task is completed */
   text-decoration: line-through;
   color: var(--color-text-secondary);
+  /* Animation for strikethrough - uses opacity only (GPU-accelerated) */
+  animation: strikethrough 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes strikethrough {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }
 
 .task-edit-input {
   flex: 1;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  /* Apply consistent padding using spacing variables */
+  padding: var(--spacing-3) var(--spacing-4);
+  /* Apply font-size-sm */
   font-size: var(--font-size-sm);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--border-radius-sm);
+  /* Add 2px border with neutral-200 color */
+  border: 2px solid var(--color-neutral-200);
+  /* Apply border-radius using CSS variables */
+  border-radius: var(--radius-md);
+  /* Set semi-transparent white background */
+  background: rgba(255, 255, 255, 0.9);
+  /* Remove default outline */
   outline: none;
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.task-edit-input:focus {
+  /* Change border-color to primary-500 on focus */
+  border-color: var(--color-primary-500);
+  /* Add multi-layer box-shadow with colored glow on focus */
+  /* Note: box-shadow and border-color changes are not animated */
+  box-shadow: 
+    0 0 0 3px rgba(52, 152, 219, 0.1),
+    var(--shadow-md);
+  /* Change background to solid white on focus */
+  background: white;
 }
 
 .btn-edit-task,
@@ -713,7 +1542,8 @@ body {
   border: none;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
-  transition: all 0.3s ease;
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 500;
   white-space: nowrap;
 }
@@ -724,6 +1554,7 @@ body {
 }
 
 .btn-edit-task:hover {
+  /* Note: background-color change is not animated */
   background-color: var(--color-primary-dark);
 }
 
@@ -733,6 +1564,7 @@ body {
 }
 
 .btn-delete-task:hover {
+  /* Note: background-color change is not animated */
   background-color: var(--color-danger-dark);
 }
 
@@ -742,6 +1574,7 @@ body {
 }
 
 .btn-save-task:hover {
+  /* Note: background-color change is not animated */
   background-color: var(--color-success-dark);
 }
 
@@ -751,6 +1584,7 @@ body {
 }
 
 .btn-cancel-edit:hover {
+  /* Note: background-color change is not animated */
   background-color: var(--color-neutral-dark);
 }
 
@@ -769,17 +1603,33 @@ body {
 
 .link-name-input,
 .link-url-input {
-  padding: var(--spacing-xs) var(--spacing-sm);
+  /* Apply consistent padding using spacing variables */
+  padding: var(--spacing-3) var(--spacing-4);
+  /* Apply font-size-sm */
   font-size: var(--font-size-sm);
-  border: 2px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
+  /* Add 2px border with neutral-200 color */
+  border: 2px solid var(--color-neutral-200);
+  /* Apply border-radius using CSS variables */
+  border-radius: var(--radius-md);
+  /* Set semi-transparent white background */
+  background: rgba(255, 255, 255, 0.9);
+  /* Remove default outline */
   outline: none;
-  transition: border-color 0.3s ease;
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .link-name-input:focus,
 .link-url-input:focus {
-  border-color: var(--color-primary);
+  /* Change border-color to primary-500 on focus */
+  border-color: var(--color-primary-500);
+  /* Add multi-layer box-shadow with colored glow on focus */
+  /* Note: box-shadow and border-color changes are not animated */
+  box-shadow: 
+    0 0 0 3px rgba(52, 152, 219, 0.1),
+    var(--shadow-md);
+  /* Change background to solid white on focus */
+  background: white;
 }
 
 .btn-add-link {
@@ -795,8 +1645,9 @@ body {
   /* Apply border-radius using CSS variables */
   border-radius: var(--radius-md);
   cursor: pointer;
-  /* Add smooth transitions */
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   /* Apply font-weight-semibold */
   font-weight: var(--font-weight-semibold);
   /* Add box-shadow-md */
@@ -804,12 +1655,21 @@ body {
 }
 
 .btn-add-link:hover {
+  /* Use will-change only during hover (Requirement 12.3) */
+  will-change: transform;
   transform: translateY(-2px);
+  /* Note: box-shadow change is not animated */
   box-shadow: var(--shadow-primary);
+}
+
+.btn-add-link:not(:hover) {
+  /* Remove will-change after hover (Requirement 12.3) */
+  will-change: auto;
 }
 
 .btn-add-link:active {
   transform: translateY(0);
+  /* Note: box-shadow change is not animated */
   box-shadow: var(--shadow-sm);
 }
 
@@ -821,17 +1681,30 @@ body {
 
 .link-button {
   position: relative;
-  background-color: var(--color-primary);
-  border-radius: var(--border-radius-sm);
+  /* Apply gradient background for modern look */
+  background: var(--gradient-primary);
+  /* Apply rounded corners using border-radius variables */
+  border-radius: var(--radius-md);
   overflow: hidden;
-  transition: transform 0.2s ease, background-color 0.3s ease;
-  /* Optimize for GPU acceleration */
-  will-change: transform;
+  /* Consistent padding and sizing */
+  padding: var(--spacing-4);
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .link-button:hover {
-  background-color: var(--color-primary-dark);
-  transform: translateY(-2px);
+  /* Use will-change only during hover (Requirement 12.3) */
+  will-change: transform;
+  /* Lift and scale effect on hover */
+  transform: translateY(-4px) scale(1.02);
+  /* Note: box-shadow change is not animated */
+  box-shadow: var(--shadow-primary);
+}
+
+.link-button:not(:hover) {
+  /* Remove will-change after hover (Requirement 12.3) */
+  will-change: auto;
 }
 
 .link-button a {
@@ -862,15 +1735,234 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  /* Only animate GPU-accelerated properties (Requirement 12.1) */
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Start hidden */
   opacity: 0;
 }
 
 .link-button:hover .btn-delete-link {
+  /* Fade in on card hover */
   opacity: 1;
 }
 
 .btn-delete-link:hover {
+  /* Note: background-color change is not animated */
   background-color: var(--color-danger-dark);
   transform: scale(1.1);
+}
+
+/* Responsive Design - Desktop (1024px - 1439px) */
+/* Requirements: 11.6 */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  /* Apply standard spacing (Requirement 11.6) */
+  body {
+    padding: var(--spacing-5); /* 20px */
+  }
+  
+  .dashboard {
+    padding: var(--spacing-6); /* 24px */
+    max-width: 1200px;
+  }
+  
+  .dashboard-header {
+    margin-bottom: var(--spacing-10); /* 40px */
+  }
+  
+  /* Multi-column grid layout (Requirement 11.6) */
+  .dashboard-main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-8); /* 32px */
+  }
+  
+  /* Standard spacing for component padding (Requirement 11.6) */
+  .component-section {
+    padding: var(--spacing-8); /* 32px */
+  }
+  
+  /* Maintain full animations (Requirement 11.6) */
+  /* No animation adjustments needed - full animations are maintained from base styles */
+  
+  /* Typography adjustments for desktop */
+  .dashboard-header h1 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .greeting-message {
+    font-size: var(--font-size-lg);
+  }
+  
+  .time-display {
+    font-size: var(--font-size-xxl);
+  }
+  
+  .date-display {
+    font-size: var(--font-size-md);
+  }
+  
+  .timer-display {
+    font-size: var(--font-size-xxxl);
+    margin-bottom: var(--spacing-8); /* Standard spacing */
+  }
+  
+  /* Timer controls with standard spacing */
+  .timer-controls {
+    margin-bottom: var(--spacing-8); /* Standard spacing */
+    gap: var(--spacing-4); /* Standard gap */
+  }
+  
+  /* Duration config with standard spacing */
+  .duration-config {
+    padding-top: var(--spacing-6); /* Standard spacing */
+    gap: var(--spacing-4); /* Standard gap */
+  }
+  
+  /* Task input container with standard spacing */
+  .task-input-container {
+    gap: var(--spacing-4); /* Standard gap */
+  }
+  
+  /* Task items with standard spacing */
+  .task-item {
+    padding: var(--spacing-4); /* Standard padding */
+    gap: var(--spacing-4); /* Standard gap */
+  }
+  
+  /* Link input container with standard spacing */
+  .link-input-container {
+    gap: var(--spacing-4); /* Standard gap */
+  }
+  
+  /* Links grid with multi-column layout */
+  .links-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--spacing-5); /* Standard gap */
+  }
+  
+  /* Link buttons with standard padding */
+  .link-button {
+    padding: var(--spacing-5); /* Standard padding */
+  }
+  
+  .link-button a {
+    padding: var(--spacing-5) var(--spacing-4); /* Standard padding */
+  }
+}
+
+/* Accessibility: Reduced Motion Support */
+/* Requirements: 3.6, 13.4 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Accessibility: Visible Focus Indicators */
+/* Requirements: 13.2 */
+*:focus-visible {
+  outline: 3px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Responsive Design - Large Desktop (1440px+) */
+/* Requirements: 11.6 */
+@media (min-width: 1440px) {
+  /* Use generous spacing (Requirement 11.6) */
+  body {
+    padding: var(--spacing-6); /* 24px */
+  }
+  
+  .dashboard {
+    padding: var(--spacing-8); /* 32px */
+    /* Wider max-width for container (Requirement 11.6) */
+    max-width: 1400px;
+  }
+  
+  .dashboard-header {
+    margin-bottom: var(--spacing-12); /* 48px - generous spacing */
+  }
+  
+  /* Multi-column grid layout with generous spacing (Requirement 11.6) */
+  .dashboard-main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-10); /* 40px - generous spacing */
+  }
+  
+  /* Generous spacing for component padding (Requirement 11.6) */
+  .component-section {
+    padding: var(--spacing-10); /* 40px - generous spacing */
+  }
+  
+  /* Maintain full animations (Requirement 11.6) */
+  /* No animation adjustments needed - full animations are maintained from base styles */
+  
+  /* Typography adjustments for large desktop */
+  .dashboard-header h1 {
+    font-size: var(--font-size-xxl);
+  }
+  
+  .greeting-message {
+    font-size: var(--font-size-xl);
+  }
+  
+  .time-display {
+    font-size: var(--font-size-xxxl);
+  }
+  
+  .date-display {
+    font-size: var(--font-size-lg);
+  }
+  
+  .timer-display {
+    font-size: var(--font-size-xxxl);
+    margin-bottom: var(--spacing-10); /* Generous spacing */
+  }
+  
+  /* Timer controls with generous spacing */
+  .timer-controls {
+    margin-bottom: var(--spacing-10); /* Generous spacing */
+    gap: var(--spacing-5); /* Generous gap */
+  }
+  
+  /* Duration config with generous spacing */
+  .duration-config {
+    padding-top: var(--spacing-8); /* Generous spacing */
+    gap: var(--spacing-5); /* Generous gap */
+  }
+  
+  /* Task input container with generous spacing */
+  .task-input-container {
+    gap: var(--spacing-5); /* Generous gap */
+  }
+  
+  /* Task items with generous spacing */
+  .task-item {
+    padding: var(--spacing-5); /* Generous padding */
+    gap: var(--spacing-5); /* Generous gap */
+  }
+  
+  /* Link input container with generous spacing */
+  .link-input-container {
+    gap: var(--spacing-5); /* Generous gap */
+  }
+  
+  /* Links grid with multi-column layout and generous spacing */
+  .links-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-6); /* Generous gap */
+  }
+  
+  /* Link buttons with generous padding */
+  .link-button {
+    padding: var(--spacing-6); /* Generous padding */
+  }
+  
+  .link-button a {
+    padding: var(--spacing-6) var(--spacing-5); /* Generous padding */
+  }
 }

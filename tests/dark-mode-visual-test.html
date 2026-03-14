@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Visual Test</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+        }
+        .test-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--color-text-primary);
+        }
+        .color-swatch {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            text-align: center;
+            padding: 5px;
+        }
+        .theme-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .theme-btn {
+            padding: 12px 24px;
+            margin: 5px;
+            border: none;
+            border-radius: var(--radius-md);
+            background: var(--gradient-primary);
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-controls">
+        <button class="theme-btn" onclick="setTheme('light')">Light Mode</button>
+        <button class="theme-btn" onclick="setTheme('dark')">Dark Mode</button>
+    </div>
+
+    <div class="test-container">
+        <h1 style="text-align: center; color: var(--color-text-primary);">Dark Mode Visual Test</h1>
+        
+        <div class="test-section component-section">
+            <div class="test-title">Color Swatches</div>
+            <div style="display: flex; flex-wrap: wrap;">
+                <div class="color-swatch" style="background: var(--color-primary-500); color: white;">
+                    Primary 500
+                </div>
+                <div class="color-swatch" style="background: var(--color-accent-500); color: white;">
+                    Accent 500
+                </div>
+                <div class="color-swatch" style="background: var(--color-success); color: white;">
+                    Success
+                </div>
+                <div class="color-swatch" style="background: var(--color-danger); color: white;">
+                    Danger
+                </div>
+                <div class="color-swatch" style="background: var(--color-background); color: var(--color-text-primary);">
+                    Background
+                </div>
+                <div class="color-swatch" style="background: var(--color-text-primary); color: var(--color-background);">
+                    Text Primary
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section component-section">
+            <div class="test-title">Typography</div>
+            <p style="color: var(--color-text-primary);">Primary text color - should be readable in both modes</p>
+            <p style="color: var(--color-text-secondary);">Secondary text color - should be readable in both modes</p>
+            <h1 style="color: var(--color-text-primary);">Heading 1</h1>
+            <h2 style="color: var(--color-text-primary);">Heading 2</h2>
+            <h3 style="color: var(--color-text-primary);">Heading 3</h3>
+        </div>
+
+        <div class="test-section component-section">
+            <div class="test-title">Buttons</div>
+            <button class="btn-start">Start Button</button>
+            <button class="btn-stop">Stop Button</button>
+            <button class="btn-reset">Reset Button</button>
+            <button class="btn-add-task">Add Task</button>
+        </div>
+
+        <div class="test-section component-section">
+            <div class="test-title">Input Fields</div>
+            <input type="text" class="task-input" placeholder="Task input field">
+            <input type="text" class="name-input" placeholder="Name input field">
+            <input type="number" class="duration-input" placeholder="Duration">
+        </div>
+
+        <div class="test-section component-section">
+            <div class="test-title">Task Items</div>
+            <ul class="task-list">
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <span class="task-text">Task item 1</span>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox" checked>
+                    <span class="task-text">Task item 2 (completed)</span>
+                </li>
+                <li class="task-item">
+                    <input type="checkbox" class="task-checkbox">
+                    <span class="task-text">Task item 3</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="test-section component-section">
+            <div class="test-title">Glassmorphism Effect</div>
+            <p style="color: var(--color-text-primary);">
+                This section demonstrates the glassmorphism effect. In light mode, it should have a frosted glass appearance
+                with a light semi-transparent background. In dark mode, it should adapt to a darker semi-transparent background
+                while maintaining the blur effect.
+            </p>
+        </div>
+
+        <div class="test-section component-section">
+            <div class="test-title">Shadows</div>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="padding: 20px; background: var(--color-background); box-shadow: var(--shadow-sm); border-radius: var(--radius-md);">
+                    Shadow SM
+                </div>
+                <div style="padding: 20px; background: var(--color-background); box-shadow: var(--shadow-md); border-radius: var(--radius-md);">
+                    Shadow MD
+                </div>
+                <div style="padding: 20px; background: var(--color-background); box-shadow: var(--shadow-lg); border-radius: var(--radius-md);">
+                    Shadow LG
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('productivity_dashboard_theme', theme);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('productivity_dashboard_theme') || 'light';
+        setTheme(savedTheme);
+    </script>
+</body>
+</html>

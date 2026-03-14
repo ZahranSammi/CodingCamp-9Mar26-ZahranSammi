@@ -462,7 +462,24 @@ class FocusTimerComponent {
     // Batch DOM updates to minimize reflows
     // Update time display
     if (this.cachedElements.timerDisplay) {
-      this.cachedElements.timerDisplay.textContent = this.formatTime(this.timeRemaining);
+      const formattedTime = this.formatTime(this.timeRemaining);
+      this.cachedElements.timerDisplay.textContent = formattedTime;
+      
+      // Add/remove running class for pulse animation
+      if (this.timerState === 'running') {
+        this.cachedElements.timerDisplay.classList.add('running');
+        this.cachedElements.timerDisplay.classList.remove('completed');
+      } else {
+        this.cachedElements.timerDisplay.classList.remove('running');
+        // Add completed class if timer reached zero
+        if (this.timeRemaining === 0) {
+          this.cachedElements.timerDisplay.classList.add('completed');
+          // Remove completed class after animation completes (0.6s)
+          setTimeout(() => {
+            this.cachedElements.timerDisplay.classList.remove('completed');
+          }, 600);
+        }
+      }
     }
 
     // Update button visibility and disabled state based on state
@@ -858,6 +875,7 @@ class TaskListComponent {
       const deleteButton = document.createElement('button');
       deleteButton.className = 'btn-delete-task';
       deleteButton.textContent = 'Delete';
+      deleteButton.setAttribute('aria-label', `Delete task: ${task.text}`);
       deleteButton.addEventListener('click', () => {
         if (confirm('Delete this task?')) {
           this.deleteTask(task.id);
@@ -1018,6 +1036,7 @@ class QuickLinksComponent {
       const deleteBtn = document.createElement('button');
       deleteBtn.className = 'btn-delete-link';
       deleteBtn.textContent = '×';
+      deleteBtn.setAttribute('aria-label', `Delete link: ${link.name}`);
       deleteBtn.addEventListener('click', (e) => {
         e.preventDefault();
         this.deleteLink(link.id);
@@ -1207,9 +1226,58 @@ class Dashboard {
 
 // Initialize Dashboard on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize dark mode
+  initializeDarkMode();
+  
   const dashboard = new Dashboard();
   dashboard.init();
 });
+
+// Dark Mode Toggle Functionality
+function initializeDarkMode() {
+  // Load saved theme preference from localStorage
+  const savedTheme = localStorage.getItem('productivity_dashboard_theme');
+  
+  // Apply saved theme or default to light mode
+  if (savedTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    updateThemeIcon('dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    updateThemeIcon('light');
+  }
+  
+  // Attach event listener to theme toggle button
+  const themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', toggleDarkMode);
+  }
+}
+
+function toggleDarkMode() {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  
+  // Apply new theme
+  document.documentElement.setAttribute('data-theme', newTheme);
+  
+  // Save preference to localStorage
+  try {
+    localStorage.setItem('productivity_dashboard_theme', newTheme);
+  } catch (error) {
+    console.warn('Failed to save theme preference:', error);
+  }
+  
+  // Update icon
+  updateThemeIcon(newTheme);
+}
+
+function updateThemeIcon(theme) {
+  const themeIcon = document.querySelector('.theme-icon');
+  if (themeIcon) {
+    themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+}
 
 // Export classes for testing (ES6 module exports)
 export {
